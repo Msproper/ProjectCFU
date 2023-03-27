@@ -15,6 +15,25 @@ def login():
     if request.method == "POST":
         username=request.form['username']
         password=request.form['password']
+        with app.app_context():
+            try:
+                user = Users.query.filter_by(username=username, password=password).first()
+                if user:
+                    return redirect('/')
+                else:
+                    return render_template("login.html", error="Неправильный логин или пароль")
+            except:
+                return "ERROR"
+
+    else:
+        return render_template("login.html")
+
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == "POST":
+        username=request.form['username']
+        password=request.form['password']
         user = Users(username=username, password=password)
         with app.app_context():
             try:
@@ -25,12 +44,7 @@ def login():
                 return "ERROR"
 
     else:
-        return render_template("login.html")
-
-
-@app.route('/register')
-def register():
-    return render_template("register.html")
+        return render_template("register.html")
 
 @app.route('/')
 @app.route('/home')
