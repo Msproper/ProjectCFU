@@ -4,17 +4,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
 
-class Users(db.Model):
+class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    name = db.Column(db.String(50))
+    User_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 with app.app_context():
-    db.create_all()
-# with app.app_context():
-#     try:
-#         db.session.add(user)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return "ERROR"
+        db.create_all()
+
