@@ -1,12 +1,13 @@
 
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, date
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
 class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
 
@@ -44,20 +45,19 @@ def login():
 #     else:
 #         return render_template("update_account")
 
-@app.route('/create_account>', methods=['POST', 'GET'])
-def update_account():
+@app.route('/create_account/<int:user_id>', methods=['POST', 'GET'])
+def create_account(user_id):
     if request.method == "POST":
+        print(user_id)
         name = request.form['name']
         surname = request.form['surname']
         date = request.form['date']
-        user = request.form['var']
+        date_obj = datetime.strptime(date, '%Y-%m-%d')
         with app.app_context():
-            try:
-                db.session.add(user)
-                user_acc = UserAccount(name=name, surname=surname, date=date, User_id=user.id)
-                db.session.add(user_acc)
-            except:
-                return "ERROR"
+            user_acc = UserAccount(name=name, surname=surname, date=date_obj, User_id=user_id)
+            db.session.add(user_acc)
+            db.session.commit()
+            return redirect(url_for('user', user_id=user_id))
     else:
         return render_template("create_account.html")
 
@@ -67,7 +67,14 @@ def register():
         username=request.form['username']
         password=request.form['password']
         user = Users(username=username, password=password)
-        return render_template('create_account.html', user=user)
+        print(user.id, user.username, user.password)
+        try:
+            db.session.add(user)
+            db.session.commit()
+            print(user.id)
+            return redirect(url_for('create_account', user_id=user.id))
+        except:
+            return "error"
     else:
         return render_template("register.html")
 
@@ -77,14 +84,16 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/user/<int:id>')
-def user(id):
-    return
-
-
 @app.route('/about')
 def about():
     return render_template("about.html")
+
+@app.route('/user/<int:user_id>')
+def user(user_id):
+    user = UserAccount.query.filter_by(User_id=user_id).first()
+    print("Имя пользователя:", user.surname)
+    print("Весь пользователь:", user)
+    return render_template("user.html", user=user)
 
 if __name__ == "__main__":
     with app.app_context():
