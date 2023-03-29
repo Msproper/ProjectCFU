@@ -1,15 +1,21 @@
 
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, date
+from datetime import datetime
+from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
+import test
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.secret_key = 'bruno'
 db = SQLAlchemy(app)
-class Users(db.Model):
+
+
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    acc = db.relationship('UserAccount', backref='user', lazy='dynamic')
 
 
 class UserAccount(db.Model):
@@ -19,16 +25,27 @@ class UserAccount(db.Model):
     date = db.Column(db.DateTime)
     User_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        username=request.form['username']
-        password=request.form['password']
+        username = request.form['username']
+        password = request.form['password']
         with app.app_context():
             try:
                 user = Users.query.filter_by(username=username, password=password).first()
                 if user:
-                    return redirect('/')
+                    login_user(user)
+                    return redirect('/user', user.id)
                 else:
                     return render_template("login.html", error="Неправильный логин или пароль")
             except:
@@ -45,57 +62,69 @@ def login():
 #     else:
 #         return render_template("update_account")
 
-@app.route('/create_account/<int:user_id>', methods=['POST', 'GET'])
-def create_account(user_id):
+@app.route('/create_account', methods=['POST', 'GET'])
+def create_account():
     if request.method == "POST":
-        print(user_id)
+        user = current_user
         name = request.form['name']
         surname = request.form['surname']
         date = request.form['date']
         date_obj = datetime.strptime(date, '%Y-%m-%d')
         with app.app_context():
-            user_acc = UserAccount(name=name, surname=surname, date=date_obj, User_id=user_id)
+            user_acc = UserAccount(name=name, surname=surname, date=date_obj, User_id=user.id)
             db.session.add(user_acc)
             db.session.commit()
-            return redirect(url_for('user', user_id=user_id))
+            return redirect(url_for('user', user_id=user.id))
     else:
         return render_template("create_account.html")
+
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == "POST":
         username=request.form['username']
         password=request.form['password']
-        user = Users(username=username, password=password)
-        print(user.id, user.username, user.password)
-        try:
-            db.session.add(user)
-            db.session.commit()
-            print(user.id)
-            return redirect(url_for('create_account', user_id=user.id))
-        except:
-            return "error"
+        user = Users.query.filter_by(username=username).first()
+        if not username or not password:
+            return render_template("register.html", error="Вы не ввели логин или пароль")
+        if user:
+            return render_template("register.html", error="Такой пользователь уже существует")
+        new_user = Users(username=username, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for('create_account'))
     else:
         return render_template("register.html")
+
 
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template("index.html")
+    user = current_user
+    if user.is_authenticated: acc=user.acc
+    else: acc = None
+    return render_template("index.html", acc=acc)
 
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
+@app.route('/user')
+@login_required
+def user():
+    user = current_user
+    acc = user.acc.first()
+    print(acc)
+    return render_template('user.html', acc=acc)
 
-@app.route('/user/<int:user_id>')
-def user(user_id):
-    user = UserAccount.query.filter_by(User_id=user_id).first()
-    print("Имя пользователя:", user.surname)
-    print("Весь пользователь:", user)
-    return render_template("user.html", user=user)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+    test.delete()
     app.run(debug=True)

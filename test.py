@@ -22,10 +22,10 @@ from datetime import datetime
 date_str = '2022-03-26'
 date_obj = datetime.strptime(date_str, '%Y-%m-%d')
 
-with app.app_context():
-    user = UserAccount(name="daniar", surname="Afminov", date=date_obj, User_id=6)
-    db.session.query(Users).delete()
-    db.session.query(UserAccount).delete()
-    db.session.commit()
+def delete():
+    with app.app_context():
+        db.session.query(Users).delete()
+        db.session.query(UserAccount).delete()
+        db.session.commit()
 
 
