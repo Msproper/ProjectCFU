@@ -1,29 +1,13 @@
 
 from flask import Flask, render_template, url_for, request, redirect
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
-import test
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from DBclasses import Users, UserAccount, Recipe, db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.secret_key = 'bruno'
-db = SQLAlchemy(app)
-
-
-class Users(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-    acc = db.relationship('UserAccount', backref='user', lazy='dynamic')
-
-
-class UserAccount(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    surname = db.Column(db.String(150))
-    date = db.Column(db.DateTime)
-    User_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+db.init_app(app)
 
 
 login_manager = LoginManager()
@@ -33,6 +17,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
+
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -54,13 +39,6 @@ def login():
     else:
         return render_template("login.html")
 
-
-# @app.route('/update_account', methods=['POST', 'GET'])
-# def update_account():
-#     if request.method == "POST":
-#
-#     else:
-#         return render_template("update_account")
 
 @app.route('/create_account', methods=['POST', 'GET'])
 def create_account():
@@ -102,9 +80,19 @@ def register():
 @app.route('/home')
 def index():
     user = current_user
-    if user.is_authenticated: acc=user.acc
-    else: acc = None
-    return render_template("index.html", acc=acc)
+    AllUsers = Users.query.all()
+    acc = None
+    if user.is_authenticated and user.acc is not None:
+        acc = user.acc.first()
+    recipes = Recipe.query.all()
+    recipe_dict = {key: UserAccount.query.filter_by(user_id=key.author_id).first() for key in recipes}
+    return render_template("index.html", acc=acc, recipes=recipes, AllUsers=AllUsers, recipe_dict=recipe_dict)
+
+
+@app.route('/recipe/<int:id>')
+def recipe(id):
+    recipe = Recipe.query.filter_by(id=id).first()
+    return render_template('recipe.html', recipe=recipe)
 
 
 @app.route('/user')
@@ -112,7 +100,6 @@ def index():
 def user():
     user = current_user
     acc = user.acc.first()
-    print(acc)
     return render_template('user.html', acc=acc)
 
 
@@ -126,5 +113,4 @@ def logout():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    test.delete()
     app.run(debug=True)

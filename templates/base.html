@@ -21,17 +21,11 @@
           {% if acc %}
            <a class="me-3 py-2 text-dark text-decoration-none" href="/user">Hello {{ acc.name }}</a>
           {% else %}
-          <a class="me-3 py-2 text-dark text-decoration-none" href="/register">Register</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="/register">Зарегистрироваться</a>
           <a class="btn btn-warning" href="/login">Login</a>
           {% endif %}
       </nav>
-    </div>
-
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Pricing</h1>
-      <p class="fs-5 text-muted">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-    </div>
-  </header>
+</header>
     <h1>{%block body %}{%endblock%}</h1>
 </body>
 </html>
