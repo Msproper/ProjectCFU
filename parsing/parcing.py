@@ -29,11 +29,14 @@ for i in range(1,30):
         di["coisine"]=info.find("meta",{"itemprop":"recipeCuisine"}).get("content")
         di["photo"]=info.find("div", {"class": "emotion-1voj7e4"}).find("picture").find("source").get("srcset")
         di["time"]=info.find("div", {"class": "emotion-my9yfq"}).text
-        di['ingredients']=[i.text for i in info.find("div", {'class': "emotion-1509vkh"}).find("div", {"class": "emotion-yj4j4j"}).find_all("span", {"itemprop":"recipeIngredient"})]
+        ingr=[i.text for i in info.find("div", {'class': "emotion-1509vkh"}).find("div", {"class": "emotion-yj4j4j"}).find_all("span", {"itemprop":"recipeIngredient"})]
+        ob=[i.text for i in info.find_all("span", {"class":"emotion-bsdd3p"})]
+        di['ingredient']=list(zip(ingr,ob))
+        print(ob)
         di["arr"]=[i.find("span", {"itemprop":"text"}).text.replace('\xa0', ' ') for i in info.find_all("div", {"itemprop": "recipeInstructions"})]
         recipe_data.append(di)
         print(di)
 print(recipe_data)
 print(len(recipe_data))
 df=pd.DataFrame(recipe_data)
-df.to_excel('recipe.xlsx', index=False)
+df.to_excel('recipe1.xlsx', index=False)

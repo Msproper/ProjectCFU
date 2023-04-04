@@ -86,7 +86,7 @@ def index():
         acc = user.acc.first()
     recipes = Recipe.query.all()
     recipe_dict = {key: UserAccount.query.filter_by(user_id=key.author_id).first() for key in recipes}
-    return render_template("index.html", acc=acc, recipes=recipes, AllUsers=AllUsers, recipe_dict=recipe_dict)
+    return render_template("index.html")
 
 
 @app.route('/recipe/<int:id>')
