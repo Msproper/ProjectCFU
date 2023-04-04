@@ -21,7 +21,7 @@ def index():
     # открываем файл для записи бинарных данных
     for i, url in enumerate(urls):
         response = requests.get(url.photo, timeout=(10, 30))
-        with open(f"img/image{i + 1}.webp", "wb") as f:
+        with open(f"img/{i}.webp", "wb") as f:
             f.write(response.content)
         time.sleep(0.1)
     return "Ok"

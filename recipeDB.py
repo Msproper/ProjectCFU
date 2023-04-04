@@ -1,38 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-
+import requests
+from flask import Flask
+from DBclasses import Users, UserAccount, Recipe, db
+import os
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-db = SQLAlchemy(app)
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+db.init_app(app)
+# URL фотографии
 
 
-# Основная страница сайта
 @app.route('/')
+@app.route('/home')
 def index():
-    return render_template('index.html')
+    fds = []
+    cr = Recipe.query.all()
+    for c in cr:
+        fds.append(c.category)
+    for i, fd in enumerate(set(fds)):
+        print("<option value= \"", i+1, "\">", fd,"</option>")
+    return "s"
 
-# Страница входа пользователя
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
-
-# Страница регистрации пользователя
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    return render_template('register.html')
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('about.html')
-
-@app.route('/welcome')
-def welcome():
-    return render_template('welcome.html')
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

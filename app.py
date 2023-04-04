@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from datetime import datetime
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from DBclasses import Users, UserAccount, Recipe, db
-
+import re
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.secret_key = 'bruno'
@@ -18,7 +18,23 @@ login_manager.init_app(app)
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
+def convert_to_minutes(time_str):
+    pattern = r'(\d+)\s*минут'
+    match = re.search(pattern, time_str)
+    if match:
+        minutes = int(match.group(1))
+    else:
+        minutes = 0
 
+    pattern = r'(\d+)\s*час'
+    match = re.search(pattern, time_str)
+    if match:
+        hours = int(match.group(1))
+    else:
+        hours = 0
+
+    total_minutes = minutes + hours * 60
+    return total_minutes
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -77,7 +93,7 @@ def register():
 
 
 @app.route('/')
-@app.route('/home')
+@app.route('/index')
 def index():
     user = current_user
     AllUsers = Users.query.all()
@@ -89,14 +105,42 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/recipes')
-def recipes():
-    return render_template('recipes.html')
+@app.route('/recipes/<string:type>', methods=['POST', 'GET'])
+def recipes(type):
+    if request.method == "POST":
+        if type=="breakfast":
+            render_template('recipes.html')
+    else:
+        if type == "breakfast":
+            recipes = Recipe.query.filter_by(category="Завтраки").all()
+            return render_template('recipes.html', recipes=recipes)
+        if type == "soup":
+            recipes = Recipe.query.filter_by(category="Супы").all()
+            return render_template('recipes.html', recipes=recipes)
+        if type == "russian":
+            recipes = Recipe.query.filter_by(country="Русская кухня").all()
+            return render_template('recipes.html', recipes=recipes)
+        if type == "main":
+            recipes = Recipe.query.filter_by(category="Основные блюда").all()
+            return render_template('recipes.html', recipes=recipes)
+        if type == "fast":
+            recipes=[]
+            timers = Recipe.query.all()
+            for timer in timers:
+                if (convert_to_minutes(timer.time) < 15):
+                    recipes.append(timer)
+            return render_template('recipes.html', recipes=recipes)
 
-@app.route('/recipes/<int:id>')
-def recipe(id):
+        else: return "hello"
+
+@app.route('/recipes/recipe_details/<int:id>')
+def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()
-    return render_template('recipe.html')
+    ingr = [x[1:-1] for x in recipe.ingredients[1:-1].split(', ')]
+    text =  recipe.text[1:-1].split("', '")
+    text[0]=text[0][1:]
+    text[-1] = text[-1][:-1]
+    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text)
 
 
 @app.route('/user')

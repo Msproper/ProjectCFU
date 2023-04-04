@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/themify-icons.css">
+    <link rel="stylesheet" href="/static/css/nice-select.css">
+    <link rel="stylesheet" href="/static/css/flaticon.css">
+    <link rel="stylesheet" href="/static/css/gijgo.css">
+    <link rel="stylesheet" href="/static/css/animate.min.css">
+    <link rel="stylesheet" href="/static/css/slicknav.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -42,8 +42,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="img/logo.png" alt="">
+                                    <a href="/index">
+                                        <img src="/static/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -51,9 +51,9 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Главная</a></li>
-                                            <li><a href="recipes.html">Поиск рецептов</a></li>
-                                            <li><a href="elements.html">Элементы</a></li>
+                                            <li><a href="/index">Главная</a></li>
+                                            <li><a href="/recipes">Поиск рецептов</a></li>
+                                            <li><a href="elements">Элементы</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -61,10 +61,10 @@
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="#">Sign in</a>
+                                        <a href="/login">Sign in</a>
                                     </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="#">Sign up</a>
+                                        <a class="boxed-btn3" href="/register">Sign up</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,16 +102,16 @@
                         <div class="single_recipies white-bg d-flex justify-content-between">
                             <div class="recipies_left d-flex align-items-center">
                                 <div class="thumb">
-                                    <img src="img/svg_icon/1.svg" alt="">
+                                    <img src="/static/img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="recipies_conetent">
-                                    <a href="#"><h4>Оливье по-советски</h4></a>
+                                    <a><h4>{{recipe.name}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
+                                            <p> <i class="fa fa-map-marker"></i> {{recipe.country}}</p>
                                         </div>
                                         <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i> 1 час</p>
+                                            <p> <i class="fa fa-clock-o"></i> {{recipe.time}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -125,37 +125,27 @@
                     </div>
                     <div class="descript_wrap white-bg">
                         <div class="feature-img">
-                            <img class="img-fluid" src="img/OLIVIE.jpeg" alt="">
+                            <img class="img-fluid" src="/static/img/OLIVIE.jpeg" alt="">
                         </div>
                         <div class="single_wrap">
                             <h4>Описание</h4>
-                            <p>Первым опубликовал рецепт оливье журнал «Наша пища» в 1894 году. Та версия предполагала наличие в составе рябчиков и каперсов. В следующих вариантах (1913 и 1984 годов) появляются салат-латук и соус соя-кабуль (пикантная заправка на основе мясного бульона, уксуса и различных овощей и кореньев). Но питание гражданина Советского Союза не предполагало таких дорогих и редких ингредиентов, так что постепенно рябчиков вытеснила докторская колбаса, каперсы — соленые огурцы, а сою-кабуль — соус «Провансаль». Так и появился этот базовый рецепт — оливье по-советски, — на основе которого готовим его все мы.</p>
+                            <p>h</p>
                         </div>
                         <div class="single_wrap">
                             <h4>Ингредиенты</h4>
                             <ul>
-                                <li>Картофель - 650 г</li>
-                                <li>Морковь - 450 г</li>
-                                <li>Маринованные огурцы - 200 г</li>
-                                <li>Консервированный зеленый горошек - 1 банка</li>
-                                <li>Куриное яйцо - 6 штук</li>
-                                <li>Докторская колбаса - 500 г</li>
-                                <li>Сметана - 100 г</li>
-                                <li>Майонез - 200 г</li>
-                                <li>Соль - по вкусу</li>
+                                {% for el in ingr %}
+                                <li>{{el}}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="single_wrap">
                             <h4>Инструкция приготовления</h4>
                             <ol type="1">
-                                <li>Отварить картофель и морковь до готовности. Отдельно сварить яйца.</li>
-                                <li>Очистить картофель и морковь. Все нарезать мелкими кубиками.</li>
-                                <li>Все перемешать и заправить майонезом и сметаной.</li>
+                                {% for el in text %}
+                                <li>{{el}}</li>
+                                {% endfor %}
                             </ol>
-                        </div>
-                        <div class="single_wrap">
-                            <h4>Примечание</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
                         </div>
                     </div>
                     <div class="comment-form">
@@ -190,7 +180,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/comment/comment_1.png" alt="">
+                                        <img src="/static/img/comment/comment_1.png" alt="">
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
@@ -216,7 +206,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/comment/comment_2.png" alt="">
+                                        <img src="/static/img/comment/comment_2.png" alt="">
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
@@ -242,7 +232,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/comment/comment_3.png" alt="">
+                                        <img src="/static/img/comment/comment_3.png" alt="">
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
@@ -273,26 +263,13 @@
                         </div>
                         <div class="recipie_content">
                             <ul>
-                                <li>Опубликовано: <span>12 Nov, 2019</span></li>
-                                <li>Время приготовления: <span>1 час</span></li>
-                                <li>Порций: <span>10</span></li>
-                                <li>Кухня: <span>Русская</span></li>
-                                <li>Категория: <span> Салаты</span></li>
-                                <li>Белки: <span>10</span></li>
-                                <li>Жиры: <span>11</span></li>
-                                <li>Углеводы: <span>12</span></li>
-                                <li>Калорийность: <span>13</span></li>
+                                <li>Опубликовано: <span>9</span></li>
+                                <li>Время приготовления: <span>{{recipe.time}}</span></li>
+                                <li>Кухня: <span>{{recipe.country}}</span></li>
+                                <li>Категория: <span> {{recipe.category}}</span></li>
+                                <li>Цена: <span>а</span></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="share_wrap d-flex">
-                        <span>Поделиться</span>
-                        <ul>
-                            <li><a href="#"> <i class="fa fa-facebook"></i></a> </li>
-                            <li><a href="#"> <i class="fa fa-google-plus"></i></a> </li>
-                            <li><a href="#"> <i class="fa fa-twitter"></i></a> </li>
-                            <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -306,19 +283,7 @@
                 <div class="col-lg-12">
                     <div class="footer__text">
                         <div class="footer__logo">
-                            <a href="#"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut<br /> labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                            commodo viverra<br /> maecenas accumsan lacus vel facilisis.
-                        </p>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-envelope-o"></i></a>
+                            <a href="#"><img src="/static/img/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="footer__copyright">
@@ -337,36 +302,36 @@
 
     <!-- link that opens popup -->
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
+    <script src="/static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/isotope.pkgd.min.js"></script>
+    <script src="/static/js/ajax-form.js"></script>
+    <script src="/static/js/waypoints.min.js"></script>
+    <script src="/static/js/jquery.counterup.min.js"></script>
+    <script src="/static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/static/js/scrollIt.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/wow.min.js"></script>
+    <script src="/static/js/nice-select.min.js"></script>
+    <script src="/static/js/jquery.slicknav.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/gijgo.min.js"></script>
 
 
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src="/static/js/contact.js"></script>
+    <script src="/static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script src="/static/js/mail-script.js"></script>
 
 
-    <script src="js/main.js"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 
 </html>
