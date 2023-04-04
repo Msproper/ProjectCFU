@@ -89,10 +89,14 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/recipe/<int:id>')
+@app.route('/recipes')
+def recipes():
+    return render_template('recipes.html')
+
+@app.route('/recipes/<int:id>')
 def recipe(id):
     recipe = Recipe.query.filter_by(id=id).first()
-    return render_template('recipe.html', recipe=recipe)
+    return render_template('recipe.html')
 
 
 @app.route('/user')
