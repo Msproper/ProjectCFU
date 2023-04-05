@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -43,7 +43,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="/">
+                                    <a href="login">
                                         <img src="/static/img/logo.png" alt="">
                                     </a>
                                 </div>
@@ -101,110 +101,110 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="recipie_filter white-bg">
-                        <div class="form_inner white-bg">
-                            <h3>Фильтры</h3>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <input type="text" placeholder="Ключевые слова">
+                        <form method="POST">
+                            <div class="form_inner white-bg">
+                                <h3>Фильтры</h3>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                <input type="text" name="keyword" id="keyword" placeholder="Ключевые слова">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                <select class="wide" name="country" id="country">
+                                                    <option data-display="Страна">Страна</option>
+                                                    <option value= "Русская кухня">Русская кухня(81)</option>
+                                                    <option value= "Европейская кухня">Европейская кухня(55)</option>
+                                                    <option value= "Итальянская кухня">Итальянская кухня(51)</option>
+                                                    <option value= "Французская кухня">Французская кухня(51)</option>
+                                                    <option value= "Американская кухня">Американская кухня(41)</option>
+                                                    <option value= "Китайская кухня">Китайская кухня(14)</option>
+                                                    <option value= "Грузинская кухня">Грузинская кухня(9)</option>
+                                                    <option value= "Советская кухня">Советская кухня(7)</option>
+                                                    <option value= "Испанская кухня">Испанская кухня(7)</option>
+                                                    <option value= "Еврейская кухня">Еврейская кухня(6)</option>
+                                                    <option value= "Британская кухня">Британская кухня(6)</option>
+                                                    <option value= "Узбекская кухня">Узбекская кухня(6)</option>
+                                                    <option value= "Паназиатская кухня">Паназиатская кухня(6)</option>
+                                                    <option value= "Украинская кухня">Украинская кухня(5)</option>
+                                                    <option value= "Греческая кухня">Греческая кухня(4)</option>
+                                                    <option value= "Авторская кухня">Авторская кухня(4)</option>
+                                                    <option value= "Средиземноморская кухня">Средиземноморская кухня(4)</option>
+                                                    <option value= "Турецкая кухня">Турецкая кухня(4)</option>
+                                                    <option value= "Польская кухня">Польская кухня(3)</option>
+                                                    <option value= "Мексиканская кухня">Мексиканская кухня(3)</option>
+                                                    <option value= "Татарская кухня">Татарская кухня(3)</option>
+                                                    <option value= "Венгерская кухня">Венгерская кухня(3)</option>
+                                                    <option value= "Азербайджанская кухня">Азербайджанская кухня(3)</option>
+                                                    <option value= "Индийская кухня">Индийская кухня(2)</option>
+                                                    <option value= "Мировая">Мировая(2)</option>
+                                                    <option value= "Японская кухня">Японская кухня(2)</option>
+                                                    <option value= "Австрийская кухня">Австрийская кухня(2)</option>
+                                                    <option value= "Белорусская кухня">Белорусская кухня(2)</option>
+                                                    <option value= "Армянская кухня">Армянская кухня(2)</option>
+                                                    <option value= "Мировая кухня">Мировая кухня(2)</option>
+                                                    <option value= "Чешская кухня">Чешская кухня(2)</option>
+                                                    <option value= "Тайская кухня">Тайская кухня(2)</option>
+                                                    <option value= "Бельгийская кухня">Бельгийская кухня(1)</option>
+                                                    <option value= "Немецкая кухня">Немецкая кухня(1)</option>
+                                                    <option value= "Индонезийская кухня">Индонезийская кухня(1)</option>
+                                                    <option value= "Малайзийская кухня">Малайзийская кухня(1)</option>
+                                                    <option value= "Шотландская кухня">Шотландская кухня(1)</option>
+                                                    <option value= "Одесская кухня">Одесская кухня(1)</option>
+                                                    <option value= "Норвежская кухня">Норвежская кухня(1)</option>
+                                                    <option value= "Арабская кухня">Арабская кухня(1)</option>
+                                                    <option value= "Болгарская кухня">Болгарская кухня(1)</option>
+                                                    <option value= "Латиноамериканская кухня">Латиноамериканская кухня(1)</option>
+                                                    <option value= "Марокканская кухня">Марокканская кухня(1)</option>
+                                                    <option value= "Корейская кухня">Корейская кухня(1)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                <select class="wide">
+                                                    <option data-display="Категория">Категория</option>
+                                                    <option value= " 1 "> Супы </option>
+                                                    <option value= " 2 "> Основные блюда </option>
+                                                    <option value= " 3 "> Салаты </option>
+                                                    <option value= " 4 "> Паста и пицца </option>
+                                                    <option value= " 5 "> Завтраки </option>
+                                                    <option value= " 6 "> Соусы и маринады </option>
+                                                    <option value= " 7 "> Закуски </option>
+                                                    <option value= " 8 "> Сэндвичи </option>
+                                                    <option value= " 9 "> Выпечка и десерты </option>
+                                                    <option value= " 10 "> Напитки </option>
+                                                    <option value= " 11 "> Ризотто </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                <select class="wide">
+                                                    <option data-display="Стоимость">Стоимость</option>
+                                                    <option value="1">Дорого</option>
+                                                    <option value="2">Средне</option>
+                                                    <option value="3">Дешево</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                    <input type="number" id="min" placeholder="Время от">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single_field">
+                                                    <input type="number" id="max" placeholder="Время до">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Страна">Страна</option>
-                                                <option value= " 1 "> Узбекская кухня </option>
-                                                <option value= " 2 "> Индонезийская кухня </option>
-                                                <option value= " 3 "> Арабская кухня </option>
-                                                <option value= " 4 "> Шотландская кухня </option>
-                                                <option value= " 5 "> Венгерская кухня </option>
-                                                <option value= " 6 "> Малайзийская кухня </option>
-                                                <option value= " 7 "> Индийская кухня </option>
-                                                <option value= " 8 "> Одесская кухня </option>
-                                                <option value= " 9 "> Польская кухня </option>
-                                                <option value= " 10 "> Турецкая кухня </option>
-                                                <option value= " 11 "> Итальянская кухня </option>
-                                                <option value= " 12 "> Латиноамериканская кухня </option>
-                                                <option value= " 13 "> Чешская кухня </option>
-                                                <option value= " 14 "> Американская кухня </option>
-                                                <option value= " 15 "> Мировая </option>
-                                                <option value= " 16 "> Белорусская кухня </option>
-                                                <option value= " 17 "> Французская кухня </option>
-                                                <option value= " 18 "> Армянская кухня </option>
-                                                <option value= " 19 "> Испанская кухня </option>
-                                                <option value= " 20 "> Еврейская кухня </option>
-                                                <option value= " 21 "> Бельгийская кухня </option>
-                                                <option value= " 22 "> Азербайджанская кухня </option>
-                                                <option value= " 23 "> Австрийская кухня </option>
-                                                <option value= " 24 "> Средиземноморская кухня </option>
-                                                <option value= " 25 "> Болгарская кухня </option>
-                                                <option value= " 26 "> Корейская кухня </option>
-                                                <option value= " 27 "> Норвежская кухня </option>
-                                                <option value= " 28 "> Немецкая кухня </option>
-                                                <option value= " 29 "> Украинская кухня </option>
-                                                <option value= " 30 "> Татарская кухня </option>
-                                                <option value= " 31 "> Мировая кухня </option>
-                                                <option value= " 32 "> Авторская кухня </option>
-                                                <option value= " 33 "> Британская кухня </option>
-                                                <option value= " 34 "> Грузинская кухня </option>
-                                                <option value= " 35 "> Советская кухня </option>
-                                                <option value= " 36 "> Паназиатская кухня </option>
-                                                <option value= " 37 "> Китайская кухня </option>
-                                                <option value= " 38 "> Европейская кухня </option>
-                                                <option value= " 39 "> Мексиканская кухня </option>
-                                                <option value= " 40 "> Русская кухня </option>
-                                                <option value= " 41 "> Японская кухня </option>
-                                                <option value= " 42 "> Греческая кухня </option>
-                                                <option value= " 43 "> Тайская кухня </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Категория">Категория</option>
-                                                <option value= " 1 "> Супы </option>
-                                                <option value= " 2 "> Основные блюда </option>
-                                                <option value= " 3 "> Салаты </option>
-                                                <option value= " 4 "> Паста и пицца </option>
-                                                <option value= " 5 "> Завтраки </option>
-                                                <option value= " 6 "> Соусы и маринады </option>
-                                                <option value= " 7 "> Закуски </option>
-                                                <option value= " 8 "> Сэндвичи </option>
-                                                <option value= " 9 "> Выпечка и десерты </option>
-                                                <option value= " 10 "> Напитки </option>
-                                                <option value= " 11 "> Ризотто </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Стоимость">Стоимость</option>
-                                                <option value="1">Дорого</option>
-                                                <option value="2">Средне</option>
-                                                <option value="3">Дешево</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                                <input type="number" id="min" placeholder="Время от">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                                <input type="number" id="max" placeholder="Время до">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="reset_btn">
-                            <button  class="boxed-btn3 w-100" type="submit">Применить</button>
-                        </div>
+                            </div>
+                            <div class="reset_btn">
+                                <button  class="boxed-btn3 w-100" type="submit">Применить</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -333,7 +333,7 @@
 
 
     <!--contact js-->
-    <script src="/tatic/js/contact.js"></script>
+    <script src="/static/js/contact.js"></script>
     <script src="/static/js/jquery.ajaxchimp.min.js"></script>
     <script src="/static/js/jquery.form.js"></script>
     <script src="/static/js/jquery.validate.min.js"></script>

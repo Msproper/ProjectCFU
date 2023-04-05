@@ -28,4 +28,5 @@ class Recipe(db.Model):
     time = db.Column(db.Text)
     ingredients = db.Column(db.Text)
     text = db.Column(db.Text)
+    # likes = db.Column(db.Integer)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))

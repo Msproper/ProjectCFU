@@ -106,10 +106,20 @@ def index():
 
 
 @app.route('/recipes/<string:type>', methods=['POST', 'GET'])
-def recipes(type):
+@app.route('/recipes', methods=['POST', 'GET'])
+def recipes(type=None):
     if request.method == "POST":
-        if type=="breakfast":
-            render_template('recipes.html')
+        keyword = request.form['keyword']
+        country = request.form.get('country')
+        category = request.form.get('category')
+        recipes = Recipe.query
+        recipes=recipes.filter(Recipe.name.like(f'%{keyword}%'))
+        if not(country == "Страна"):
+            recipes = recipes.filter_by(country=country)
+        if not(category == "Категория"):
+            recipes = recipes.filter_by(category=category)
+        recipes=recipes.all()
+        return render_template('recipes.html', recipes=recipes)
     else:
         if type == "breakfast":
             recipes = Recipe.query.filter_by(category="Завтраки").all()
@@ -131,7 +141,9 @@ def recipes(type):
                     recipes.append(timer)
             return render_template('recipes.html', recipes=recipes)
 
-        else: return "hello"
+        else: return "a"
+
+
 
 @app.route('/recipes/recipe_details/<int:id>')
 def recipe_details(id):
