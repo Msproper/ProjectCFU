@@ -102,57 +102,41 @@ def index():
         acc = user.acc.first()
     recipes = Recipe.query.all()
     recipe_dict = {key: UserAccount.query.filter_by(user_id=key.author_id).first() for key in recipes}
+
     return render_template("index.html")
 
 
-@app.route('/recipes/<string:type>', methods=['POST', 'GET'])
+
 @app.route('/recipes', methods=['POST', 'GET'])
-def recipes_search(type=None):
+def recipes():
+    keyword = None
+    country = None
+    category = None
+    calories_low = None
+    calories_up = None
+    time_low = None
+    time_up = None
     if request.method == "POST":
         keyword = request.form['keyword']
         country = request.form.get('country')
         category = request.form.get('category')
-        recipes = Recipe.query
-        recipes=recipes.filter(Recipe.name.like(f'%{keyword}%'))
-        if not(country == "Страна"):
-            recipes = recipes.filter_by(country=country)
-        if not(category == "Категория"):
-            recipes = recipes.filter_by(category=category)
-        recipes = recipes.all()
-        return render_template('recipes.html',  recipes=recipes)
     else:
-        if (type):
-            if type == "breakfast":
-                recipes = Recipe.query.filter_by(category="Завтраки").all()
-                return render_template('recipes.html', recipes=recipes)
-            if type == "soup":
-                recipes = Recipe.query.filter_by(category="Супы").all()
-                return render_template('recipes.html', recipes=recipes)
-            if type == "russian":
-                recipes = Recipe.query.filter_by(country="Русская кухня").all()
-                return render_template('recipes.html', recipes=recipes)
-            if type == "main":
-                recipes = Recipe.query.filter_by(category="Основные блюда").all()
-                return render_template('recipes.html', recipes=recipes)
-            if type == "fast":
-                recipes=[]
-                timers = Recipe.query.all()
-                for timer in timers:
-                    if (convert_to_minutes(timer.time) < 15):
-                        recipes.append(timer)
-                return render_template('recipes.html', recipes=recipes)
-        else:
-            recipes = Recipe.query.all()
-            return render_template('recipes.html', recipes=recipes)
-
-@app.route('/recipes/recipe_details/<int:id>')
+        country = request.args.get('country')
+        category = request.args.get('category')
+    recipes = Recipe.query
+    if not (country == "Ключевое слово") and keyword:
+        recipes = recipes.filter(Recipe.name.like(f'%{keyword}%'))
+    if not (country == "Страна") and country:
+        recipes = recipes.filter_by(country=country)
+    if not (category == "Категория") and category:
+        recipes = recipes.filter_by(category=category)
+    recipes = recipes.all()
+    return render_template('recipes.html', recipes=recipes)
+@app.route('/recipe_details/<int:id>')
 def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()
     ingr = [x[1:-1] for x in recipe.ingredients[1:-1].split(', ')]
-    text =  recipe.text[1:-1].split("', '")
-    text[0]=text[0][1:]
-    text[-1] = text[-1][:-1]
-    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text)
+    return render_template('recipe_details.html', recipe=recipe, ingr=ingr)
 
 
 @app.route('/user')

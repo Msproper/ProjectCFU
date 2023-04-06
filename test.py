@@ -3,6 +3,8 @@ from flask import Flask
 from DBclasses import Users, UserAccount, Recipe, db
 import os
 import time
+from urllib.request import urlretrieve
+from requests.exceptions import ConnectTimeout
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -14,17 +16,27 @@ db.init_app(app)
 @app.route('/home')
 def index():
     urls = Recipe.query.all()
+    urls_items = [x.photo for x in urls ]
 
-    if not os.path.exists("img"):
-        os.makedirs("img")
+    if not os.path.exists("img_little2"):
+        os.makedirs("img_little2")
 
+    max_retries = 13
     # открываем файл для записи бинарных данных
-    for i, url in enumerate(urls):
-        response = requests.get(url.photo, timeout=(10, 30))
-        with open(f"img/{i}.webp", "wb") as f:
-            f.write(response.content)
-        time.sleep(0.1)
-    return "Ok"
+    for i, url in enumerate(urls_items[167:]):
+        retries = 0
+        time.sleep(2)
+        while retries < max_retries:
+            try:
+                response = requests.get(url, stream=True, timeout=10)
+                if response.status_code == 200:
+                    filename = f"{i+168}.webp"
+                    filepath = os.path.join("img_little2", filename)
+                    urlretrieve(url, filepath)
+                    break
+            except ConnectTimeout:
+                retries += 1
+    return "hello"
 
 if __name__ == "__main__":
     with app.app_context():
