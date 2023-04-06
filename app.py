@@ -107,7 +107,7 @@ def index():
 
 @app.route('/recipes/<string:type>', methods=['POST', 'GET'])
 @app.route('/recipes', methods=['POST', 'GET'])
-def recipes(type=None):
+def recipes_search(type=None):
     if request.method == "POST":
         keyword = request.form['keyword']
         country = request.form.get('country')
@@ -118,32 +118,32 @@ def recipes(type=None):
             recipes = recipes.filter_by(country=country)
         if not(category == "Категория"):
             recipes = recipes.filter_by(category=category)
-        recipes=recipes.all()
-        return render_template('recipes.html', recipes=recipes)
+        recipes = recipes.all()
+        return render_template('recipes.html',  recipes=recipes)
     else:
-        if type == "breakfast":
-            recipes = Recipe.query.filter_by(category="Завтраки").all()
+        if (type):
+            if type == "breakfast":
+                recipes = Recipe.query.filter_by(category="Завтраки").all()
+                return render_template('recipes.html', recipes=recipes)
+            if type == "soup":
+                recipes = Recipe.query.filter_by(category="Супы").all()
+                return render_template('recipes.html', recipes=recipes)
+            if type == "russian":
+                recipes = Recipe.query.filter_by(country="Русская кухня").all()
+                return render_template('recipes.html', recipes=recipes)
+            if type == "main":
+                recipes = Recipe.query.filter_by(category="Основные блюда").all()
+                return render_template('recipes.html', recipes=recipes)
+            if type == "fast":
+                recipes=[]
+                timers = Recipe.query.all()
+                for timer in timers:
+                    if (convert_to_minutes(timer.time) < 15):
+                        recipes.append(timer)
+                return render_template('recipes.html', recipes=recipes)
+        else:
+            recipes = Recipe.query.all()
             return render_template('recipes.html', recipes=recipes)
-        if type == "soup":
-            recipes = Recipe.query.filter_by(category="Супы").all()
-            return render_template('recipes.html', recipes=recipes)
-        if type == "russian":
-            recipes = Recipe.query.filter_by(country="Русская кухня").all()
-            return render_template('recipes.html', recipes=recipes)
-        if type == "main":
-            recipes = Recipe.query.filter_by(category="Основные блюда").all()
-            return render_template('recipes.html', recipes=recipes)
-        if type == "fast":
-            recipes=[]
-            timers = Recipe.query.all()
-            for timer in timers:
-                if (convert_to_minutes(timer.time) < 15):
-                    recipes.append(timer)
-            return render_template('recipes.html', recipes=recipes)
-
-        else: return "a"
-
-
 
 @app.route('/recipes/recipe_details/<int:id>')
 def recipe_details(id):

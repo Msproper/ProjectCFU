@@ -12,34 +12,29 @@ db.init_app(app)
 
 @app.route('/')
 def home():
-    user = Users(
-        username = "daniar",
-        password = "123"
-    )
-    db.session.add(user)
-    db.session.commit()
-    useracc = UserAccount(
-        name = "BookCookHub",
-        user_id = 1
-    )
-    db.session.add(useracc)
-    data = pd.read_excel('recipe.xlsx')
+    data = pd.read_excel('recipes.xlsx')
     db.session.commit()
     for i in range(len(data)):
         row = Recipe(
             name = str(data.iloc[i][0]),
             category = str(data.iloc[i][1]),
-            country = str(data.iloc[i][2]),
-            photo = str(data.iloc[i][3]),
-            time = str(data.iloc[i][4]),
-            ingredients = str(data.iloc[i][5]),
-            text = str(data.iloc[i][6]),
+            description = str(data.iloc[i][2]),
+            country = str(data.iloc[i][3]),
+            photo = str(data.iloc[i][4]),
+            time = str(data.iloc[i][5]),
+            ingredients = str(data.iloc[i][6]),
+            calories=str(data.iloc[i][7]),
+            protein=str(data.iloc[i][8]),
+            fat=str(data.iloc[i][9]),
+            CHO=str(data.iloc[i][10]),
+            text = str(data.iloc[i][11]),
+            photo_arr=str(data.iloc[i][12]),
             author_id = 1
         )
         db.session.add(row)
     db.session.commit()
 
-    return 'Данные успешно записаны в базу данных!'
+    return str(Recipe.query.first())
 
 if __name__ == '__main__':
     with app.app_context():
