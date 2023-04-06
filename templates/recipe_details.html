@@ -107,6 +107,7 @@
                                 <div class="recipies_conetent">
                                     <a><h4>{{recipe.name}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
+
                                         <div class="location">
                                             <p> <i class="fa fa-map-marker"></i> {{recipe.country}}</p>
                                         </div>
@@ -128,14 +129,16 @@
                             <img class="img-fluid" src="/static/img/OLIVIE.jpeg" alt="">
                         </div>
                         <div class="single_wrap">
+                            {%if not(recipe.description=="-")%}
                             <h4>Описание</h4>
-                            <p>h</p>
+                            <p>{{recipe.description}}</p>
+                            {%endif%}
                         </div>
                         <div class="single_wrap">
                             <h4>Ингредиенты</h4>
                             <ul>
-                                {% for el in ingr %}
-                                <li>{{el}}</li>
+                                {% for el, value in ingr.items() %}
+                                <li>{{el}} : {{value}}</li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -263,11 +266,14 @@
                         </div>
                         <div class="recipie_content">
                             <ul>
-                                <li>Опубликовано: <span>9</span></li>
+                                <li>Опубликовано: <span>{{recipe.date_column}}</span></li>
                                 <li>Время приготовления: <span>{{recipe.time}}</span></li>
                                 <li>Кухня: <span>{{recipe.country}}</span></li>
                                 <li>Категория: <span> {{recipe.category}}</span></li>
-                                <li>Цена: <span>а</span></li>
+                                <li>Калорий: <span> {{recipe.calories}} ккал</span></li>
+                                <li>Белков: <span> {{recipe.protein}} грамм</span></li>
+                                <li>Жиров: <span> {{recipe.fat}} грамм</span></li>
+                                <li>Углеводов: <span> {{recipe.CHO}} грамм</span></li>
                             </ul>
                         </div>
                     </div>

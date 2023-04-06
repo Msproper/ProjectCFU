@@ -4,6 +4,9 @@ from datetime import datetime
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from DBclasses import Users, UserAccount, Recipe, db
 import re
+import ast
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.secret_key = 'bruno'
@@ -116,15 +119,23 @@ def recipes():
     calories_up = None
     time_low = None
     time_up = None
+    fast_sort = None
+    recipes = Recipe.query
     if request.method == "POST":
+        fast_sort = request.form.get('fast_sort')
         keyword = request.form['keyword']
         country = request.form.get('country')
         category = request.form.get('category')
     else:
         country = request.args.get('country')
         category = request.args.get('category')
-    recipes = Recipe.query
-    if not (country == "Ключевое слово") and keyword:
+    if fast_sort == '1':
+        recipes = recipes.order_by(db.desc(Recipe.likes))
+    elif fast_sort=='2':
+        recipes = recipes.order_by(db.desc(Recipe.date_column))
+    else:
+        recipes = recipes.order_by(db.asc(Recipe.date_column))
+    if not (keyword == "Ключевое слово") and keyword:
         recipes = recipes.filter(Recipe.name.like(f'%{keyword}%'))
     if not (country == "Страна") and country:
         recipes = recipes.filter_by(country=country)
@@ -135,8 +146,14 @@ def recipes():
 @app.route('/recipe_details/<int:id>')
 def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()
-    ingr = [x[1:-1] for x in recipe.ingredients[1:-1].split(', ')]
-    return render_template('recipe_details.html', recipe=recipe, ingr=ingr)
+    text = [x for x in recipe.text[1:-1].split("', '")]
+    text[-1] = text[-1][:-1]
+    text[0] = text[0][1:]
+    lst = ast.literal_eval(recipe.ingredients)
+    ingr = {}
+    for item in lst:
+        ingr[item[0]] = item[1]
+    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text)
 
 
 @app.route('/user')

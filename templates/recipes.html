@@ -43,7 +43,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="login">
+                                    <a href="/index">
                                         <img src="/static/img/logo.png" alt="">
                                     </a>
                                 </div>
@@ -53,8 +53,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="index">Главная</a></li>
-                                            <li><a href="recipes.html">Поиск рецептов</a></li>
-                                            <li><a href="elements.html">Элементы</a></li>
+                                            <li><a href="recipes">Поиск рецептов</a></li>
+                                            <li><a href="elements">Элементы</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -62,10 +62,10 @@
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="#">Sign in</a>
+                                        <a href="login">Sign in</a>
                                     </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="#">Sign up</a>
+                                        <a class="boxed-btn3" href="register">Sign up</a>
                                     </div>
                                 </div>
                             </div>
@@ -163,40 +163,40 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="single_field">
-                                                <select class="wide">
+                                                <select class="wide" name="category" id="category">
                                                     <option data-display="Категория">Категория</option>
-                                                    <option value= " 1 "> Супы </option>
-                                                    <option value= " 2 "> Основные блюда </option>
-                                                    <option value= " 3 "> Салаты </option>
-                                                    <option value= " 4 "> Паста и пицца </option>
-                                                    <option value= " 5 "> Завтраки </option>
-                                                    <option value= " 6 "> Соусы и маринады </option>
-                                                    <option value= " 7 "> Закуски </option>
-                                                    <option value= " 8 "> Сэндвичи </option>
-                                                    <option value= " 9 "> Выпечка и десерты </option>
-                                                    <option value= " 10 "> Напитки </option>
-                                                    <option value= " 11 "> Ризотто </option>
+                                                    <option value= "Выпечка и десерты">Выпечка и десерты(188)</option>
+                                                    <option value= "Основные блюда">Основные блюда(161)</option>
+                                                    <option value= "Супы">Супы(75)</option>
+                                                    <option value= "Завтраки">Завтраки(72)</option>
+                                                    <option value= "Закуски">Закуски(64)</option>
+                                                    <option value= "Салаты">Салаты(55)</option>
+                                                    <option value= "Паста и пицца">Паста и пицца(38)</option>
+                                                    <option value= "Сэндвичи">Сэндвичи(10)</option>
+                                                    <option value= "Напитки">Напитки(10)</option>
+                                                    <option value= "Ризотто">Ризотто(7)</option>
+                                                    <option value= "Соусы и маринады">Соусы и маринады(6)</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="single_field">
-                                                <select class="wide">
-                                                    <option data-display="Стоимость">Стоимость</option>
-                                                    <option value="1">Дорого</option>
-                                                    <option value="2">Средне</option>
-                                                    <option value="3">Дешево</option>
+                                                <select class="wide" name="fast_sort" id="fast_sort">
+                                                    <option data-display="Сортировать">Сортировать</option>
+                                                    <option value="1">По популярности</option>
+                                                    <option value="2">Сначала новые</option>
+                                                    <option value="3">Сначала старые</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="single_field">
-                                                    <input type="number" id="min" placeholder="Время от">
+                                                    <input type="number" name="min_time" id="min" placeholder="Время от">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="single_field">
-                                                    <input type="number" id="max" placeholder="Время до">
+                                                    <input type="number" name="max_time" id="max" placeholder="Время до">
                                             </div>
                                         </div>
                                     </div>
@@ -213,16 +213,6 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <h4>Рецепты</h4>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="serch_cat d-flex justify-content-end">
-                                        <select>
-                                            <option data-display="Сортировать">Сортировать</option>
-                                            <option value="1">По популярности</option>
-                                            <option value="2">Сначала новые</option>
-                                            <option value="3">Сначала старые</option>
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +242,7 @@
                                     </div>
                                     <div class="recipies_right">
                                         <div class="apply_now">
-                                            <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                            <p> {{ el.likes }} </p>
                                             <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                         </div>
                                         <div class="date">
@@ -262,18 +252,6 @@
                                 </div>
                             </div>
                             {% endfor %}
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="pagination_wrap">
-                                    <ul>
-                                        <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
-                                        <li><a href="#"><span>01</span></a></li>
-                                        <li><a href="#"><span>02</span></a></li>
-                                        <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

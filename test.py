@@ -23,14 +23,14 @@ def index():
 
     max_retries = 13
     # открываем файл для записи бинарных данных
-    for i, url in enumerate(urls_items[167:]):
+    for i, url in enumerate(urls_items[609:]):
         retries = 0
         time.sleep(2)
         while retries < max_retries:
             try:
                 response = requests.get(url, stream=True, timeout=10)
                 if response.status_code == 200:
-                    filename = f"{i+168}.webp"
+                    filename = f"{i+610}.webp"
                     filepath = os.path.join("img_little2", filename)
                     urlretrieve(url, filepath)
                     break
