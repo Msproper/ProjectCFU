@@ -5808,28 +5808,35 @@ h6 {
 }
 
 /* line 1015, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.default-select .nice-select .list .option {
-  font-weight: 300;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  line-height: 28px;
-  min-height: 28px;
-  font-size: 12px;
-  padding-left: 20px;
+.single_field input {
+    font-size: 14px !important;
+}
+.nice-select .option {
+    font-weight: 300;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    line-height: 28px;
+    min-height: 28px;
+    font-size: 14px !important;
+    padding-left: 20px;
 }
 
 /* line 1022, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.default-select .nice-select .list .option.selected {
-  color: #ff5e13;
-  background: transparent;
+    .nice-select .option.selected {
+        color: #9f142b;
+        background: transparent;
+    }
+
+.nice-select span {
+    font-size: 14px !important;
 }
 
 /* line 1026, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.default-select .nice-select .list .option:hover {
-  color: #ff5e13;
-  background: transparent;
+.nice-select .option:hover {
+    color: #9f142b;
+    background: transparent;
 }
 
 /* line 1033, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
@@ -5871,7 +5878,7 @@ h6 {
 }
 
 /* line 1060, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.form-select .nice-select .list .option {
+.form-select .nice-select .option {
   font-weight: 300;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -5879,21 +5886,21 @@ h6 {
   transition: all 0.3s ease 0s;
   line-height: 28px;
   min-height: 28px;
-  font-size: 12px;
+  font-size: 14px;
   padding-left: 45px;
 }
 
 /* line 1067, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.form-select .nice-select .list .option.selected {
-  color: #ff5e13;
-  background: transparent;
-}
+    .form-select .nice-select .option.selected {
+        color: #9f142b;
+        background: transparent;
+    }
 
 /* line 1071, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
-.form-select .nice-select .list .option:hover {
-  color: #ff5e13;
-  background: transparent;
-}
+    .form-select .nice-select .option:hover {
+        color: #9f142b;
+        background: transparent;
+    }
 
 /* line 1078, ../../Arafath/CL/December/235. recipe board/HTML/scss/_elements.scss */
 .form-select .current {
