@@ -3033,7 +3033,7 @@ h3 {
 
 /* line 27, ../../Arafath/CL/December/235. recipe board/HTML/scss/_recipe.scss */
 .recipe_searcing_wrap::after {
-  background-image: url(../img/recipe/1.jpg);
+  background-image: url(../img/1.png);
   width: 50%;
   height: 100%;
   background-repeat: no-repeat;
@@ -3447,7 +3447,7 @@ h3 {
 
 /* line 64, ../../Arafath/CL/December/235. recipe board/HTML/scss/_recipe_list.scss */
 .recipe_listing_area .recipe_lists .single_recipes .recipes_left .recipes_conetent .links_locat .location {
-  margin-right: 50px;
+  margin-right: 20px;
 }
 
 @media (max-width: 767px) {
@@ -3460,7 +3460,7 @@ h3 {
 /* line 69, ../../Arafath/CL/December/235. recipe board/HTML/scss/_recipe_list.scss */
 .recipe_listing_area .recipe_lists .single_recipes .recipes_left .recipes_conetent .links_locat .location p {
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: #AAB1B7;
 }
 
