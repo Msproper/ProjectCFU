@@ -101,9 +101,8 @@
                     <div class="recipe_details_header">
                         <div class="single_recipes white-bg d-flex justify-content-between">
                             <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/1.svg" alt="">
-                                </div>
+                                <div class="thumb" style="background-image:url(../static/img_little/{{recipe.id}}.webp)">
+                                    </div>
                                 <div class="recipes_conetent">
                                     <a><h4>{{recipe.name}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
@@ -112,7 +111,7 @@
                                             <p> <i class="fa fa-map-marker"></i> {{recipe.country}}</p>
                                         </div>
                                         <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i> {{recipe.time}}</p>
+                                            <p> <i class="fa fa-clock-o"></i> {{recipe.time}} минут</p>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +266,7 @@
                         <div class="recipe_content">
                             <ul>
                                 <li>Опубликовано: <span>{{recipe.date_column}}</span></li>
-                                <li>Время приготовления: <span>{{recipe.time}}</span></li>
+                                <li>Время приготовления: <span>{{recipe.time}} минут</span></li>
                                 <li>Кухня: <span>{{recipe.country}}</span></li>
                                 <li>Категория: <span> {{recipe.category}}</span></li>
                                 <li>Калорий: <span> {{recipe.calories}} ккал</span></li>

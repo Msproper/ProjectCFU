@@ -135,12 +135,11 @@
                     <div class="popular_search d-flex align-items-center">
                         <span>Частые запросы:</span>
                         <ul>
-                            <li><a href="#">Новогодние блюда</a></li>
-                            <li><a href="#">Постная кухня</a></li>
-                            <li><a href="#">Птица</a></li>
-                            <li><a href="#">Пасха</a></li>
-                            <li><a href="#">Кофейные напитки</a></li>
-                            <li><a href="#">Рыба</a></li>
+                            <li><a href="{{ url_for('recipes', ingredient='Сырники') }}">Сырники</a></li>
+                            <li><a href="{{ url_for('recipes', ingredient='Перец') }}">Перец</a></li>
+                            <li><a href="{{ url_for('recipes', category='Завтраки') }}">Завтраки</a></li>
+                            <li><a href="{{ url_for('recipes', category='Паста и пицца') }}">Паста и пицца</a></li>
+                            <li><a href="{{ url_for('recipes', category='Напитки') }}">Напитки</a></li>
                         </ul>
                     </div>
                 </div>
@@ -161,7 +160,7 @@
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', country='Русская кухня') }}"><h4>Русская кухня</h4></a>
+                        <a href="{{ url_for('recipes', country='Русская') }}"><h4>Русская кухня</h4></a>
                         <p> <span>120</span> Рецептов</p>
                     </div>
                 </div>
@@ -173,7 +172,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', country='Итальянская кухня') }}"><h4>Итальянская кухня</h4></a>
+                        <a href="{{ url_for('recipes', country='Итальянская') }}"><h4>Итальянская кухня</h4></a>
                         <p> <span>100</span> Рецептов</p>
                     </div>
                 </div>
@@ -185,7 +184,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', time_low='5', time_up='15') }}"><h4>Быстрые блюда 5-15 минут</h4></a>
+                        <a href="{{ url_for('recipes', min_time='5', max_time='15') }}"><h4>Быстрые блюда 5-15 минут</h4></a>
                         <p> <span>110</span> Рецептов</p>
                     </div>
                 </div>
@@ -203,7 +202,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', category='Французкая кухня') }}"><h4>Французкая кухня</h4></a>
+                        <a href="{{ url_for('recipes', category='Французкая') }}"><h4>Французкая кухня</h4></a>
                         <p> <span>100</span> Рецептов</p>
                     </div>
                 </div>

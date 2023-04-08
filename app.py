@@ -81,11 +81,15 @@ def register():
     if request.method == "POST":
         username=request.form['username']
         password=request.form['password']
+        email=request.form['email']
         user = Users.query.filter_by(username=username).first()
+        email = Users.query.filter_by(email=email).first()
         if not username or not password:
             return render_template("register.html", error="Вы не ввели логин или пароль")
         if user:
-            return render_template("register.html", error="Такой пользователь уже существует")
+            return render_template("register.html", error="пользователь с таким логином уже существует")
+        if email:
+            return render_template("register.html", error="Пользователь с такой почтой уже существует")
         new_user = Users(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
@@ -115,34 +119,58 @@ def recipes():
     keyword = None
     country = None
     category = None
+    min_time = None
     calories_low = None
     calories_up = None
-    time_low = None
-    time_up = None
+    max_time = None
     fast_sort = None
+    ingredient = None
     recipes = Recipe.query
     if request.method == "POST":
         fast_sort = request.form.get('fast_sort')
         keyword = request.form['keyword']
         country = request.form.get('country')
         category = request.form.get('category')
+        min_time = request.form['min_time']
+        max_time = request.form['max_time']
     else:
+        keyword = request.args.get('keyword')
+        ingredient = request.args.get('ingredient')
+        calories_low = request.args.get('calories_low')
+        calories_up = request.args.get('calories_up')
+        min_time = request.args.get('min_time')
+        max_time = request.args.get('max_time')
         country = request.args.get('country')
         category = request.args.get('category')
+    print(keyword, max_time, min_time, calories_up, calories_low, country, category)
     if fast_sort == '1':
         recipes = recipes.order_by(db.desc(Recipe.likes))
-    elif fast_sort=='2':
+    elif fast_sort == '2':
         recipes = recipes.order_by(db.desc(Recipe.date_column))
     else:
         recipes = recipes.order_by(db.asc(Recipe.date_column))
-    if not (keyword == "Ключевое слово") and keyword:
+    if keyword:
         recipes = recipes.filter(Recipe.name.like(f'%{keyword}%'))
-    if not (country == "Страна") and country:
+    if ingredient:
+        recipes = recipes.filter(Recipe.ingredients.like(f'%{ingredient}%'))
+    if not(country=="Кухня") and country:
         recipes = recipes.filter_by(country=country)
     if not (category == "Категория") and category:
         recipes = recipes.filter_by(category=category)
+    if min_time:
+        recipes = recipes.filter(Recipe.time>min_time)
+    if max_time:
+        recipes = recipes.filter(Recipe.time<max_time)
+    if calories_low:
+        recipes = recipes.filter(Recipe.calories > calories_low)
+    if calories_up:
+        recipes = recipes.filter(Recipe.calories < calories_up)
+    print(recipes)
     recipes = recipes.all()
+    print(recipes)
     return render_template('recipes.html', recipes=recipes)
+
+
 @app.route('/recipe_details/<int:id>')
 def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()

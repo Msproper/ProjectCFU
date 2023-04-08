@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
+from flask_login import UserMixin
 import datetime
 db = SQLAlchemy()
 
@@ -9,14 +9,17 @@ class Users(UserMixin, db.Model):
     password = db.Column(db.String(80), nullable=False)
     acc = db.relationship('UserAccount', backref='user', lazy='dynamic')
     recipes = db.relationship('Recipe', backref='author', lazy='dynamic')
+    email = db.Column(db.String(80), unique=True)
+    liked_rec = db.Column(db.Text)
 
 
 class UserAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
     surname = db.Column(db.String(150))
-    date = db.Column(db.DateTime)
+    status = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
 
 
 class Recipe(db.Model):
@@ -26,7 +29,7 @@ class Recipe(db.Model):
     description = db.Column(db.Text)
     country = db.Column(db.Text)
     photo = db.Column(db.Text)
-    time = db.Column(db.Text)
+    time = db.Column(db.Integer)
     ingredients = db.Column(db.Text)
     calories = db.Column(db.Integer)
     protein = db.Column(db.Integer)

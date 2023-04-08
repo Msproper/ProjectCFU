@@ -8,8 +8,17 @@ import re
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db.init_app(app)
+import ast
 # URL фотографии
 
+
+def sum_by_word(d, word):
+    total = 0
+    for key, value in d.items():
+        if word in key:
+            total += value
+            print(key)
+    print(total)
 def convert_to_minutes(time_str):
     pattern = r'(\d+)\s*минут'
     match = re.search(pattern, time_str)
@@ -39,44 +48,24 @@ def index():
     sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
     for key, value in sorted_dict.items():
         print(f"<option value= \"{key}\">{key}({value})</option>")
+    #
+    # category = [rec.country for rec in recipes]
+    # dict_cat = {key: category.count(key) for key in set(category)}
+    # sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
 
-    category = [rec.country for rec in recipes]
-    dict_cat = {key: category.count(key) for key in set(category)}
-    sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
-    for key, value in sorted_dict.items():
-        print(f"<option value= \"{key}\">{key}({value})</option>")
+    ask = {}
+    for el in recipes:
+        lst = [x[0] for x in ast.literal_eval(el.ingredients)]
+        for el in lst:
+            try:
+                ask[el] += 1
+            except:
+                ask[el] = 1
+    sum_by_word(ask, "масло")
+    sum_by_word(ask, "жир")
+    sum_by_word(ask, "перец")
+    ask2 = dict(sorted(ask.items(), key=operator.itemgetter(1), reverse=True))
 
-    time = [convert_to_minutes(rec.time) for rec in recipes]
-    ranges = {"5-15": 0, "15-30": 0, "30-60": 0, "60-120": 0, "120+": 0}
-
-    for num in time:
-        if num <= 15:
-            ranges["5-15"] += 1
-        elif num <= 30:
-            ranges["15-30"] += 1
-        elif num <= 60:
-            ranges["30-60"] += 1
-        elif num <= 120:
-            ranges["60-120"] += 1
-        else:
-            ranges["120+"] += 1
-
-    calories = [rec.calories for rec in recipes]
-    ranges = {"250-": 0, "250-500": 0, "500-750": 0, "750-1000": 0, "1000+": 0}
-    for num in calories:
-        if num <= 125:
-            ranges["250-"] += 1
-        elif num <= 250:
-            ranges["250-500"] += 1
-        elif num <= 750:
-            ranges["500-750"] += 1
-        elif num <= 1000:
-            ranges["750-1000"] += 1
-        else:
-            ranges["1000+"] += 1
-
-    for key, value in ranges.items():
-        print(f"<option value= \"{key}\">{key}({value})</option>")
     return "s"
 
 if __name__ == "__main__":
