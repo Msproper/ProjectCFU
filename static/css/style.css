@@ -30,7 +30,7 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-/*
+
 .bx {
   position: relative;
   z-index: 0;
@@ -43,30 +43,29 @@ body {
   margin-bottom: 100px;
 }
 
-form {
+.registration {
   margin: 0 auto;
   width: 450px;
   height: 500px;
   text-align: center;
 }
 
-.group {
+.registration .group {
   text-align: left;
   margin: 10px;
-  padding:5px;
+  padding:5px 35px;
 }
 
-input {
+.registration .group input {
   height:  40px;
-  width: 380px;
-  background: #9f142b;
+  width: 100%;
   color: #fff;
   display: inline-block;
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 500;
   border: 0;
-  border: 1px solid transparent;
+  border: 1px solid #999999;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -76,34 +75,15 @@ input {
   cursor: pointer;
 }
 
-input:focus {
+.registration .group input:focus {
   border: 2px solid #670616;
-  transform: translateX(10px);
 }
 
 .pl1 {
-  background: #9f142b;
-  color: #fff;
-  display: inline-block;
+  margin: 20px;
   padding: 13px 29px 13px 29px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  border: 0;
-  border: 1px solid transparent;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  text-align: center;
-  color: #fff !important;
-  text-transform: none;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  cursor: pointer;
 }
-*/
+
 /* line 13, ../../Arafath/CL/December/235. recipe board/HTML/scss/theme-default.scss */
 .img {
   max-width: 100%;
