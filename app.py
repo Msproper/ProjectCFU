@@ -118,9 +118,9 @@ def recipes():
     else:
         recipes = recipes.order_by(db.asc(Recipe.date_column))
     if keyword:
-        recipes = recipes.filter(Recipe.name.like(f'%{keyword}%'))
+        recipes = recipes.filter(Recipe.name.ilike(f'%{keyword}%'))
     if ingredient:
-        recipes = recipes.filter(Recipe.ingredients.like(f'%{ingredient}%'))
+        recipes = recipes.filter(Recipe.ingredients.ilike(f'%{ingredient}%'))
     if not(country=="Кухня") and country:
         recipes = recipes.filter_by(country=country)
     if not (category == "Категория") and category:
@@ -149,6 +149,23 @@ def recipe_details(id):
         ingr[item[0]] = item[1]
     return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text)
 
+@app.route('/like/<int:id>')
+def like(id):
+    user = current_user
+    recipe = Recipe.query.filter_by(id=id).first()
+    list = user.liked_rec.split(', ')
+    if id in list:
+        list.remove(id)
+        recipe.likes -= 1
+    else:
+        list.append(id)
+        recipe.likes += 1
+    print(list)
+    # user.liked_rec = new_likes
+    # db.session.commit()
+    return redirect(url_for('recipe_details', id=id))
+
+
 
 @app.route('/user')
 @login_required
@@ -156,11 +173,13 @@ def user():
     user = current_user
     acc = user.acc.first()
     recipes = user.recipes.all()
+    list = user.liked_rec[1:-1].split(', ')
+    recipes_liked = Recipe.query.filter(Recipe.id.in_(list)).all()
     if len(recipes)>5:
         recipes = recipes[:5]
     else:
         recipes = recipes[:len(recipes)-1]
-    return render_template('user.html', acc=acc, recipes=recipes)
+    return render_template('user.html', acc=acc, recipes=recipes, recipes_liked=recipes_liked)
 
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
