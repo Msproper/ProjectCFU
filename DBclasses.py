@@ -15,9 +15,9 @@ class Users(UserMixin, db.Model):
 
 class UserAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    surname = db.Column(db.String(150))
-    status = db.Column(db.Text)
+    name = db.Column(db.String(150), default="Имя")
+    surname = db.Column(db.String(150), default="Фамилия")
+    status = db.Column(db.Text, default="Пусто")
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 

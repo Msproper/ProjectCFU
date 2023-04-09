@@ -74,26 +74,26 @@
         </div>
     </header>
 
-    <div class="bx">
-        <form method="post" class="registration" action="">
-            <h1 title="Авторизация">Авторизация</h1>
-            <div class="group">
-                <label>Имя пользователя:</label>
-                <input type="text" name="username" id="username" class="form-control">
-            </div>
-            <div class="group">
-                <label>Пароль:</label>
-                <input type="password" name="password" id="password" class="form-control">
-            </div>
-            <div class="pl1 reset_btn">
-                <button class="boxed-btn3 w-100 btn btn-success" type="submit">Войти</button>
-            </div>
+
+    <div class="conteiner mt-5">
+        <form method="post">
+        <h1>Редактируйте (ЫЫЫЫЫЫ)</h1>
+        <div class="single_field">
+            <input type="text" name="status" id="status" placeholder="{{acc.status}}">
+        </div>
+        <div class="single_field">
+            <input type="text" name="name" id="name" placeholder="{{acc.name}}">
+        </div>
+        <div class="single_field">
+            <input type="text" name="surname" id="surname" placeholder="{{acc.surname}}">
+        </div>
+
+            <button  class="boxed-btn3 w-100" type="submit">Применить</button>
         </form>
-        {% if error %}
-        <p style="color:red">{{ error }}</p>
-        {% endif %}
     </div>
 
+
+    <!-- footer start -->
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -107,7 +107,8 @@
                         <p>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script>
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                 </div>
@@ -115,38 +116,57 @@
         </div>
     </footer>
     <!--/ footer end  -->
+
     <!-- link that opens popup -->
     <!-- JS here -->
-    <script src="static/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="static/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="static/js/popper.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/owl.carousel.min.js"></script>
-    <script src="static/js/isotope.pkgd.min.js"></script>
-    <script src="static/js/ajax-form.js"></script>
-    <script src="static/js/waypoints.min.js"></script>
-    <script src="static/js/jquery.counterup.min.js"></script>
-    <script src="static/js/imagesloaded.pkgd.min.js"></script>
-    <script src="static/js/scrollIt.js"></script>
-    <script src="static/js/jquery.scrollUp.min.js"></script>
-    <script src="static/js/wow.min.js"></script>
-    <script src="static/js/nice-select.min.js"></script>
-    <script src="static/js/jquery.slicknav.min.js"></script>
-    <script src="static/js/jquery.magnific-popup.min.js"></script>
-    <script src="static/js/plugins.js"></script>
-    <script src="static/js/gijgo.min.js"></script>
+    <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/isotope.pkgd.min.js"></script>
+    <script src="../static/js/ajax-form.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../static/js/scrollIt.js"></script>
+    <script src="../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/nice-select.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <!-- <script src="js/gijgo.min.js"></script> -->
+    <script src="../static/js/range.js"></script>
 
 
 
     <!--contact js-->
-    <script src="static/js/contact.js"></script>
-    <script src="static/js/jquery.ajaxchimp.min.js"></script>
-    <script src="static/js/jquery.form.js"></script>
-    <script src="static/js/jquery.validate.min.js"></script>
-    <script src="static/js/mail-script.js"></script>
+    <script src="../static/js/contact.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/jquery.form.js"></script>
+    <script src="../static/js/jquery.validate.min.js"></script>
+    <script src="../static/js/mail-script.js"></script>
 
 
-    <script src="static/js/main.js"></script>
+    <script src="../static/js/main.js"></script>
+
+
+	<script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 24600,
+                values: [ 750, 24600 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                }
+            });
+            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+        } );
+        </script>
 </body>
 
 </html>

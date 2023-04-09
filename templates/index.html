@@ -107,16 +107,6 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="single_input">
                         <select class="wide">
-                            <option data-display="Стоимость">Стоимость продуктов</option>
-                            <option value="1">Дорогие</option>
-                            <option value="2">Средние</option>
-                            <option value="4">Дешевые</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <select class="wide">
                             <option data-display="Категория">Категория</option>
                             <option value="1">Категория 1</option>
                             <option value="2">Категория 2</option>
@@ -126,7 +116,7 @@
                 </div>
                 <div class="col-lg-3 col-md-12">
                     <div class="find_btn">
-                        <a href="#" class="boxed-btn3">Найти</a>
+                        <a href="{{ url_for('recipes', ingredient='Сырники') }}" class="boxed-btn3">Найти</a>
                     </div>
                 </div>
             </div>
@@ -249,198 +239,53 @@
             </div>
             <div class="recipe_lists">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/1.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Оливье с курицей</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
+                    {% for el in recipes%}
+                     <div class="col-lg-12 col-md-12">
+                                <div class="single_recipes white-bg justify-content-between">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <div class="recipes_left align-items-center">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-10">
+                                                        <div class="recipes_conetent">
+                                                            <a href="recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
+                                                            <div class="links_locat d-flex align-items-center">
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
+                                                                </div>
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
+                                                                </div>
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Дешево</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-meh-o"></i> Среднее</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/2.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Крем-суп с мидиями</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Дорого</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-smile-o"></i> Хорошо</p>
+                                        <div class="col-lg-3">
+                                            <div class="recipes_right">
+                                                <div class="apply_now">
+                                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    <!--<p> {{ el.likes }} </p>-->
+                                                    <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                                                </div>
+                                                <div class="date">
+                                                    <p>Добавлено: {{el.date_column}}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/3.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Наполеон классический</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Средне</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-smile-o"></i> Хорошо</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/4.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Чечевичный суп</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Средне</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-frown-o"></i> Плохо</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/5.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Запеченное филе лосося</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Дорого</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-meh-o"></i> Среднее</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="single_recipes white-bg d-flex justify-content-between">
-                            <div class="recipes_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img src="../static/img/svg_icon/1.svg" alt="">
-                                </div>
-                                <div class="recipes_conetent">
-                                    <a href="recipe_details"><h4>Глинтвейн б/а</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> Россия</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-rub"></i> Дешево</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-smile-o"></i> Хорошо</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="recipe_details" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: 31 Jan 2020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

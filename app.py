@@ -20,25 +20,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
-
-def convert_to_minutes(time_str):
-    pattern = r'(\d+)\s*минут'
-    match = re.search(pattern, time_str)
-    if match:
-        minutes = int(match.group(1))
-    else:
-        minutes = 0
-
-    pattern = r'(\d+)\s*час'
-    match = re.search(pattern, time_str)
-    if match:
-        hours = int(match.group(1))
-    else:
-        hours = 0
-
-    total_minutes = minutes + hours * 60
-    return total_minutes
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
@@ -49,7 +30,7 @@ def login():
                 user = Users.query.filter_by(username=username, password=password).first()
                 if user:
                     login_user(user)
-                    return redirect('/user', user.id)
+                    return redirect(url_for("user"))
                 else:
                     return render_template("login.html", error="Неправильный логин или пароль")
             except:
@@ -59,29 +40,14 @@ def login():
         return render_template("login.html")
 
 
-@app.route('/create_account', methods=['POST', 'GET'])
-def create_account():
-    if request.method == "POST":
-        user = current_user
-        name = request.form['name']
-        surname = request.form['surname']
-        date = request.form['date']
-        date_obj = datetime.strptime(date, '%Y-%m-%d')
-        with app.app_context():
-            user_acc = UserAccount(name=name, surname=surname, date=date_obj, User_id=user.id)
-            db.session.add(user_acc)
-            db.session.commit()
-            return redirect(url_for('user', user_id=user.id))
-    else:
-        return render_template("create_account.html")
-
-
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == "POST":
-        username=request.form['username']
-        password=request.form['password']
+        username = request.form['username']
+        password = request.form['password']
+        password2 = request.form['password2']
         email=request.form['email']
+        print(username, password, email)
         user = Users.query.filter_by(username=username).first()
         email = Users.query.filter_by(email=email).first()
         if not username or not password:
@@ -90,11 +56,15 @@ def register():
             return render_template("register.html", error="пользователь с таким логином уже существует")
         if email:
             return render_template("register.html", error="Пользователь с такой почтой уже существует")
-        new_user = Users(username=username, password=password)
+        if not(password==password2):
+            return render_template("register.html", error="Пароли не совпадают")
+        new_user = Users(username=username, password=password, email = email)
+        new_acc = UserAccount(user_id=user.id)
         db.session.add(new_user)
+        db.session.add(new_acc)
         db.session.commit()
         login_user(new_user)
-        return redirect(url_for('create_account'))
+        return redirect(url_for('user'))
     else:
         return render_template("register.html")
 
@@ -107,10 +77,9 @@ def index():
     acc = None
     if user.is_authenticated and user.acc is not None:
         acc = user.acc.first()
-    recipes = Recipe.query.all()
-    recipe_dict = {key: UserAccount.query.filter_by(user_id=key.author_id).first() for key in recipes}
-
-    return render_template("index.html")
+    recipes = Recipe.query.order_by(db.desc(Recipe.likes)).all()
+    recipes = recipes[:5]
+    return render_template("index.html", recipes=recipes)
 
 
 
@@ -142,7 +111,6 @@ def recipes():
         max_time = request.args.get('max_time')
         country = request.args.get('country')
         category = request.args.get('category')
-    print(keyword, max_time, min_time, calories_up, calories_low, country, category)
     if fast_sort == '1':
         recipes = recipes.order_by(db.desc(Recipe.likes))
     elif fast_sort == '2':
@@ -165,9 +133,7 @@ def recipes():
         recipes = recipes.filter(Recipe.calories > calories_low)
     if calories_up:
         recipes = recipes.filter(Recipe.calories < calories_up)
-    print(recipes)
     recipes = recipes.all()
-    print(recipes)
     return render_template('recipes.html', recipes=recipes)
 
 
@@ -189,7 +155,34 @@ def recipe_details(id):
 def user():
     user = current_user
     acc = user.acc.first()
-    return render_template('user.html', acc=acc)
+    recipes = user.recipes.all()
+    if len(recipes)>5:
+        recipes = recipes[:5]
+    else:
+        recipes = recipes[:len(recipes)-1]
+    return render_template('user.html', acc=acc, recipes=recipes)
+
+@app.route('/update', methods=['POST', 'GET'])
+@login_required
+def update():
+    user = current_user
+    if request.method == "POST":
+        status = request.form['status']
+        name = request.form['name']
+        surname = request.form['surname']
+        acc = user.acc.first()
+        if status:
+            acc.status = status
+        if name:
+            acc.name = name
+        if surname:
+            acc.surname = surname
+        db.session.commit()
+        return redirect(url_for("user"))
+    else:
+        user = current_user
+        acc = user.acc.first()
+        return render_template('update.html', acc=acc)
 
 
 @app.route('/logout')
