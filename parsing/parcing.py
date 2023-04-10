@@ -24,16 +24,7 @@ for i in range(1,30):
         soupinfor=BeautifulSoup(new.content, 'html.parser')
         info=soupinfor.find("div", {'class':"emotion-2k9cfu"})
         di={}
-        di["name"]=info.find("meta",{"itemprop":"keywords"}).get("content")
-        di["category"]=info.find("meta",{"itemprop":"recipeCategory"}).get("content")
-        di["coisine"]=info.find("meta",{"itemprop":"recipeCuisine"}).get("content")
         di["photo"]=info.find("div", {"class": "emotion-1voj7e4"}).find("picture").find("source").get("srcset")
-        di["time"]=info.find("div", {"class": "emotion-my9yfq"}).text
-        ingr=[i.text for i in info.find("div", {'class': "emotion-1509vkh"}).find("div", {"class": "emotion-yj4j4j"}).find_all("span", {"itemprop":"recipeIngredient"})]
-        ob=[i.text for i in info.find_all("span", {"class":"emotion-bsdd3p"})]
-        di['ingredient']=list(zip(ingr,ob))
-        print(ob)
-        di["arr"]=[i.find("span", {"itemprop":"text"}).text.replace('\xa0', ' ') for i in info.find_all("div", {"itemprop": "recipeInstructions"})]
         recipe_data.append(di)
         print(di)
 print(recipe_data)
