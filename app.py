@@ -73,13 +73,12 @@ def register():
 @app.route('/index')
 def index():
     user = current_user
-    AllUsers = Users.query.all()
     acc = None
-    if user.is_authenticated and user.acc is not None:
+    if current_user.is_authenticated:
         acc = user.acc.first()
     recipes = Recipe.query.order_by(db.desc(Recipe.likes)).all()
     recipes = recipes[:5]
-    return render_template("index.html", recipes=recipes)
+    return render_template("index.html", recipes=recipes, acc=acc)
 
 
 
@@ -95,6 +94,10 @@ def recipes():
     fast_sort = None
     ingredient = None
     recipes = Recipe.query
+    user = current_user
+    acc = None
+    if current_user.is_authenticated:
+        acc = user.acc.first()
     if request.method == "POST":
         fast_sort = request.form.get('fast_sort')
         keyword = request.form['keyword']
@@ -134,35 +137,67 @@ def recipes():
     if calories_up:
         recipes = recipes.filter(Recipe.calories < calories_up)
     recipes = recipes.all()
-    return render_template('recipes.html', recipes=recipes)
+    return render_template('recipes.html', recipes=recipes, acc=acc)
 
 
+@app.route('/create/<int:id>', methods=['POST', 'GET'])
+@app.route('/create', methods=['POST', 'GET'])
+def create(id=None):
+    if request.method == "POST":
+        if id:
+            recipe = Recipe.query.filter_by(id=id).first()
+            recipe.name = request.form['name']
+            recipe.country = request.form['country']
+            recipe.description= request.form['description']
+            recipe.text = request.form['text']
+            recipe.category = request.form.get('category')
+            # recipe.request.form['ingredient_name']
+            return redirect(url_for("recipe_details", id=id))
+        else:
+            return redirect(url_for("recipe_details", id=id))
+    else:
+        if id:
+            recipe = Recipe.query.filter_by(id=id).first()
+            return render_template("create.html", recipe=recipe)
+        else:
+            return render_template("create.html", recipe=None)
 @app.route('/recipe_details/<int:id>')
 def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()
     text = [x for x in recipe.text[1:-1].split("', '")]
-    text[-1] = text[-1][:-1]
-    text[0] = text[0][1:]
     lst = ast.literal_eval(recipe.ingredients)
+    author = recipe.author.acc.first()
     ingr = {}
+    user = current_user
+    redactable = False
+    if user.acc.first() == author:
+        redactable = True
+    acc = None
+    if current_user.is_authenticated:
+        acc = user.acc.first()
     for item in lst:
         ingr[item[0]] = item[1]
-    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text)
+    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable)
 
 @app.route('/like/<int:id>')
 def like(id):
     user = current_user
-    recipe = Recipe.query.filter_by(id=id).first()
-    list = user.liked_rec.split(', ')
-    if id in list:
-        list.remove(id)
-        recipe.likes -= 1
+    if not (current_user.is_authenticated):
+        return redirect(url_for("login"))
     else:
-        list.append(id)
-        recipe.likes += 1
-    print(list)
-    # user.liked_rec = new_likes
-    # db.session.commit()
+        recipe = Recipe.query.filter_by(id=id).first()
+        if user.liked_rec:
+            list = [int(x) for x in user.liked_rec.split(' ')]
+        else:
+            list = []
+        if id in list:
+            list.remove(id)
+            recipe.likes -= 1
+        else:
+            list.append(id)
+            recipe.likes += 1
+        user.liked_rec = ' '.join(map(str, list))
+        db.session.commit()
     return redirect(url_for('recipe_details', id=id))
 
 
@@ -171,9 +206,11 @@ def like(id):
 @login_required
 def user():
     user = current_user
-    acc = user.acc.first()
+    acc = None
+    if current_user.is_authenticated:
+        acc = user.acc.first()
     recipes = user.recipes.all()
-    list = user.liked_rec[1:-1].split(', ')
+    list = user.liked_rec.split(' ')
     recipes_liked = Recipe.query.filter(Recipe.id.in_(list)).all()
     if len(recipes)>5:
         recipes = recipes[:5]

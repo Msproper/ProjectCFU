@@ -60,12 +60,18 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
+                                    {% if acc %}
+                                        <div class="d-none d-lg-block">
+                                            <a class="boxed-btn3" href="/user">Hello {{ acc.name }}</a>
+                                        </div>
+                                    {% else %}
                                     <div class="phone_num d-none d-xl-block">
                                         <a href="/login">Sign in</a>
                                     </div>
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="/register">Sign up</a>
                                     </div>
+                                    {%endif%}
                                 </div>
                             </div>
                             <div class="col-12">
@@ -121,6 +127,11 @@
                                     <a class="heart_mark" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
                                 </div>
                             </div>
+                            {% if redactable%}
+                                <div>
+                                    <a class="boxed-btn3" href="/create/{{ recipe.id }}">Редактировать</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="descript_wrap white-bg">
@@ -273,6 +284,7 @@
                                 <li>Белков: <span> {{recipe.protein}} грамм</span></li>
                                 <li>Жиров: <span> {{recipe.fat}} грамм</span></li>
                                 <li>Углеводов: <span> {{recipe.CHO}} грамм</span></li>
+                                <li>Автор: <span> {{author.name}} {{author.surname}}</span></li>
                             </ul>
                         </div>
                     </div>

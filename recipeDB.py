@@ -43,28 +43,31 @@ def convert_to_minutes(time_str):
 def index():
 
     recipes = Recipe.query.all()
-    category = [rec.category for rec in recipes]
-    dict_cat = {key: category.count(key) for key in set(category)}
-    sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
-    for key, value in sorted_dict.items():
-        print(f"<option value= \"{key}\">{key}({value})</option>")
+    for rec in recipes:
+        rec.ingredients = rec.ingredients[1:-1]
+    db.session.commit()
+    # category = [rec.category for rec in recipes]
+    # dict_cat = {key: category.count(key) for key in set(category)}
+    # sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
+    # for key, value in sorted_dict.items():
+    #     print(f"<option value= \"{key}\">{key}({value})</option>")
     #
     # category = [rec.country for rec in recipes]
     # dict_cat = {key: category.count(key) for key in set(category)}
     # sorted_dict = dict(sorted(dict_cat.items(), key=operator.itemgetter(1), reverse=True))
 
-    ask = {}
-    for el in recipes:
-        lst = [x[0] for x in ast.literal_eval(el.ingredients)]
-        for el in lst:
-            try:
-                ask[el] += 1
-            except:
-                ask[el] = 1
-    sum_by_word(ask, "масло")
-    sum_by_word(ask, "жир")
-    sum_by_word(ask, "перец")
-    ask2 = dict(sorted(ask.items(), key=operator.itemgetter(1), reverse=True))
+    # ask = {}
+    # for el in recipes:
+    #     lst = [x[0] for x in ast.literal_eval(el.ingredients)]
+    #     for el in lst:
+    #         try:
+    #             ask[el] += 1
+    #         except:
+    #             ask[el] = 1
+    # sum_by_word(ask, "масло")
+    # sum_by_word(ask, "жир")
+    # sum_by_word(ask, "перец")
+    # ask2 = dict(sorted(ask.items(), key=operator.itemgetter(1), reverse=True))
 
     return "s"
 
