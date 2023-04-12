@@ -47,7 +47,6 @@ def register():
         password = request.form['password']
         password2 = request.form['password2']
         email=request.form['email']
-        print(username, password, email)
         user = Users.query.filter_by(username=username).first()
         email = Users.query.filter_by(email=email).first()
         if not username or not password:
@@ -59,8 +58,9 @@ def register():
         if not(password==password2):
             return render_template("register.html", error="Пароли не совпадают")
         new_user = Users(username=username, password=password, email = email)
-        new_acc = UserAccount(user_id=user.id)
         db.session.add(new_user)
+        db.session.commit()
+        new_acc = UserAccount(user_id=new_user.id)
         db.session.add(new_acc)
         db.session.commit()
         login_user(new_user)
@@ -169,15 +169,22 @@ def recipe_details(id):
     author = recipe.author.acc.first()
     ingr = {}
     user = current_user
+    liked = False
     redactable = False
-    if user.acc.first() == author:
-        redactable = True
     acc = None
     if current_user.is_authenticated:
+        if user.acc.first() == author:
+            redactable = True
+        if user.liked_rec:
+            list = [int(x) for x in user.liked_rec.split(' ')]
+        else:
+            list = []
+        if id in list:
+            liked = True
         acc = user.acc.first()
     for item in lst:
         ingr[item[0]] = item[1]
-    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable)
+    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable, liked=liked)
 
 @app.route('/like/<int:id>')
 def like(id):
@@ -209,8 +216,11 @@ def user():
     acc = None
     if current_user.is_authenticated:
         acc = user.acc.first()
+    if user.liked_rec:
+        list = [int(x) for x in user.liked_rec.split(' ')]
+    else:
+        list = []
     recipes = user.recipes.all()
-    list = user.liked_rec.split(' ')
     recipes_liked = Recipe.query.filter(Recipe.id.in_(list)).all()
     if len(recipes)>5:
         recipes = recipes[:5]

@@ -115,7 +115,6 @@
                                 <div class="recipes_conetent">
                                     <a><h4>{{recipe.name}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
-
                                         <div class="location">
                                             <p> <i class="fa fa-map-marker"></i> {{recipe.country}}</p>
                                         </div>
@@ -125,11 +124,17 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="recipes_right">
                                 <div class="apply_now">
-                                    <a class="heart_mark" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
+                                    {% if liked %}
+                                        <a class="fa fa-clock-o" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
+                                    {%else%}
+                                        <a class="heart_mark" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
+                                    {%endif%}
                                 </div>
                             </div>
+
                             {% if redactable%}
                                 <div>
                                     <a class="boxed-btn3" href="/create/{{ recipe.id }}">Редактировать</a>
@@ -139,7 +144,7 @@
                     </div>
                     <div class="descript_wrap white-bg">
                         <div class="feature-img">
-                            <img class="img-fluid" src="../static/img/OLIVIE.jpeg" alt="">
+                            <img class="img-fluid" src="../static/img_little2/arr_{{recipe.id}}.webp" alt="">
                         </div>
                         <div class="single_wrap">
                             {%if not(recipe.description=="-")%}
