@@ -57,9 +57,12 @@
                                 <div class="Appointment">
 
                                     {% if acc %}
-                                        <div class="d-none d-lg-block">
-                                            <a class="boxed-btn3" href="/user">Hello {{ acc.name }}</a>
-                                        </div>
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/logout">Log out</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
                                     {% else %}
                                     <div class="phone_num d-none d-xl-block">
                                         <a href="/login">Sign in</a>
@@ -81,22 +84,28 @@
         </div>
     </header>
 
-
-    <div class="conteiner mt-5">
-        <form method="post">
-        <h1>Редактируйте (ЫЫЫЫЫЫ)</h1>
-        <div class="single_field">
-            <input type="text" name="status" id="status" placeholder="Введите ваш статус" value="{{ acc.status }}">
-        </div>
-        <div class="single_field">
-            <input type="text" name="name" id="name" placeholder="Введите ваше имя" value="{{ acc.name }}">
-        </div>
-        <div class="single_field">
-            <input type="text" name="surname" id="surname" placeholder="Введите вашу фамилию" value="{{ acc.surname }}">
-        </div>
-
-            <button  class="boxed-btn3 w-100" type="submit">Применить</button>
+    <div class="bx">
+        <form method="post" class="registration" action="">
+            <h1 title="Изменить профиль">Изменить профиль</h1>
+            <div class="group">
+                <label>Статус:</label>
+                <input class="form-control" type="text" name="status" id="status" placeholder="Введите ваш статус" value="{{ acc.status }}">
+            </div>
+            <div class="group">
+                <label>Имя:</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Введите ваше имя" value="{{ acc.name }}">
+            </div>
+            <div class="group">
+                <label>Фамилия:</label>
+                <input class="form-control" type="text" name="surname" id="surname" placeholder="Введите вашу фамилию" value="{{ acc.surname }}">
+            </div>
+            <div class="pl1 reset_btn">
+                <button class="boxed-btn3 w-100 btn btn-success" type="submit">Применить</button>
+            </div>
         </form>
+        {% if error %}
+        <p style="color:red">{{ error }}</p>
+        {% endif %}
     </div>
 
 
@@ -123,7 +132,6 @@
         </div>
     </footer>
     <!--/ footer end  -->
-
     <!-- link that opens popup -->
     <!-- JS here -->
     <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -159,21 +167,21 @@
     <script src="../static/js/main.js"></script>
 
 
-	<script>
-        $( function() {
-            $( "#slider-range" ).slider({
+    <script>
+        $(function () {
+            $("#slider-range").slider({
                 range: true,
                 min: 0,
                 max: 24600,
-                values: [ 750, 24600 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                values: [750, 24600],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1] + "/ Year");
                 }
             });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
-        } );
-        </script>
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1) + "/ Year");
+        });
+    </script>
 </body>
 
 </html>

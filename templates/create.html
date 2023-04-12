@@ -30,14 +30,14 @@
 <body>
     <!-- header-start -->
     <header>
-        <div class="header-area" style="background-color: #f1be16">
+        <div class="header-area " style="background-color: #f1be16">
             <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid ">
                     <div class="header_bottom_border">
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="/index">
+                                    <a href="index">
                                         <img src="../static/img/logo.png" alt="">
                                     </a>
                                 </div>
@@ -46,26 +46,31 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="/index">Главная</a></li>
-                                            <li><a href="/recipes">Поиск рецептов</a></li>
-                                            <li><a href="/elements">Элементы</a></li>
+                                            <li><a href="index">Главная</a></li>
+                                            <li><a href="recipes">Поиск рецептов</a></li>
+                                            <li><a href="elements">Элементы</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
                                     {% if acc %}
-                                        <div class="d-none d-lg-block">
-                                            <a class="boxed-btn3" href="/user">Hello {{ acc.name }}</a>
-                                        </div>
-                                    {% else %}
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="/login">Sign in</a>
+                                        <a href="/logout">Log out</a>
                                     </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="/register">Sign up</a>
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="login">Sign in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="register">Sign up</a>
                                     </div>
                                     {% endif %}
+                                </div>
                             </div>
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
@@ -78,51 +83,59 @@
         </div>
     </header>
 
-
-    <div class="conteiner mt-5">
-        <form method="post">
-        <h1>Создайте свой рецепт(ЫЫЫЫЫЫ)</h1>
-        <div class="single_field">
-            <input type="text" name="name" id="name" placeholder="Введите название рецепта" value="{{ recipe.name }}">
-        </div>
-        <div class="single_field">
-            <input type="text" name="country" id="country" placeholder="Введите страну" value="{{ recipe.country }}">
-        </div>
-            <div class="col-lg-12">
-                <div class="single_field">
-                    <select class="wide" name="category" id="category">
-                        <option data-display="Категория">Категория</option>
-                        <option value= "Выпечка и десерты">Выпечка и десерты(188)</option>
-                        <option value= "Основные блюда">Основные блюда(161)</option>
-                        <option value= "Супы">Супы(75)</option>
-                        <option value= "Завтраки">Завтраки(72)</option>
-                        <option value= "Закуски">Закуски(64)</option>
-                        <option value= "Салаты">Салаты(55)</option>
-                        <option value= "Паста и пицца">Паста и пицца(38)</option>
-                        <option value= "Сэндвичи">Сэндвичи(10)</option>
-                        <option value= "Напитки">Напитки(10)</option>
-                        <option value= "Ризотто">Ризотто(7)</option>
-                        <option value= "Соусы и маринады">Соусы и маринады(6)</option>
-                    </select>
-                </div>
+    <div class="bx">
+        <form method="post" class="create_recipe" action="">
+            <h1 title="Создание рецепта">Создание рецепта</h1>
+            <div class="group">
+                <label>Название:</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Введите название рецепта" value="{{ recipe.name }}">
             </div>
-            <div class="single_field">
-                <input type="text" name="description" id="description" placeholder="Введите описание" value="{{ recipe.description }}">
+            <div class="group">
+                <label>Страна:</label>
+                <input class="form-control" type="text" name="country" id="country" placeholder="Введите страну" value="{{ recipe.country }}">
             </div>
-            <div class="single_field">
-                <input type="text" name="ingredient_name" id="ingredient_name" placeholder="Введите ингредиенты (через запятую)">
+            <div class="group">
+                <label>Категория:</label>
+                <select class="wide" name="category" id="category">
+                    <option data-display="Категория">Категория</option>
+                    <option value="Выпечка и десерты">Выпечка и десерты(188)</option>
+                    <option value="Основные блюда">Основные блюда(161)</option>
+                    <option value="Супы">Супы(75)</option>
+                    <option value="Завтраки">Завтраки(72)</option>
+                    <option value="Закуски">Закуски(64)</option>
+                    <option value="Салаты">Салаты(55)</option>
+                    <option value="Паста и пицца">Паста и пицца(38)</option>
+                    <option value="Сэндвичи">Сэндвичи(10)</option>
+                    <option value="Напитки">Напитки(10)</option>
+                    <option value="Ризотто">Ризотто(7)</option>
+                    <option value="Соусы и маринады">Соусы и маринады(6)</option>
+                </select>
             </div>
-            <div class="single_field">
-                <input type="text" name="ingredient_mass" id="ingredient_mass" placeholder="Введите массы (через запятую)">
+            <div class="group">
+                <label>Описание:</label>
+                <input class="form-control" type="text" name="description" id="description" placeholder="Введите описание" value="{{ recipe.description }}">
             </div>
-            <div class="single_field">
-                <input type="text" name="text" id="text" placeholder="Введите текст рецепта" value="{{ recipe.text }}">
+            <div class="group">
+                <label>Ингредиенты:</label>
+                <input class="form-control" type="text" name="ingredient_name" id="ingredient_name" placeholder="Введите ингредиенты (через запятую)">
             </div>
-            <button  class="boxed-btn3 w-100" type="submit">Применить</button>
+            <div class="group">
+                <label>Массы ингредиентов:</label>
+                <input class="form-control" type="text" name="ingredient_mass" id="ingredient_mass" placeholder="Введите массы (через запятую)">
+            </div>
+            <div class="group">
+                <label>Этапы приготовления:</label>
+                <input class="form-control" type="text" name="text" id="text" placeholder="Введите текст рецепта" value="{{ recipe.text }}">
+            </div>
+            <div class="pl1 reset_btn">
+                <button class="boxed-btn3 w-100 btn btn-success" type="submit">Применить</button>
+            </div>
         </form>
+        {% if error %}
+        <p style="color:red">{{ error }}</p>
+        {% endif %}
     </div>
-
-
+    
     <!-- footer start -->
     <footer class="footer">
         <div class="container">
@@ -146,7 +159,6 @@
         </div>
     </footer>
     <!--/ footer end  -->
-
     <!-- link that opens popup -->
     <!-- JS here -->
     <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -182,21 +194,21 @@
     <script src="../static/js/main.js"></script>
 
 
-	<script>
-        $( function() {
-            $( "#slider-range" ).slider({
+    <script>
+        $(function () {
+            $("#slider-range").slider({
                 range: true,
                 min: 0,
                 max: 24600,
-                values: [ 750, 24600 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                values: [750, 24600],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1] + "/ Year");
                 }
             });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
-        } );
-        </script>
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1) + "/ Year");
+        });
+    </script>
 </body>
 
 </html>

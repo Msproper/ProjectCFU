@@ -30,7 +30,7 @@
 <body>
     <!-- header-start -->
     <header>
-        <div class="header-area" style="background-color: #f1be16">
+        <div class="header-area">
             <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid ">
                     <div class="header_bottom_border">
@@ -56,9 +56,12 @@
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
                                     {% if acc %}
-                                        <div class="d-none d-lg-block">
-                                            <a class="boxed-btn3" href="/user">Hello {{ acc.name }}</a>
-                                        </div>
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/logout">Log out</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
                                     {% else %}
                                     <div class="phone_num d-none d-xl-block">
                                         <a href="/login">Sign in</a>
@@ -79,112 +82,205 @@
             </div>
         </div>
     </header>
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="slider_text">
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s" color="#9f142b">{{acc.status}}</h5>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">{{ acc.name }} {{ acc.surname }}</h3>
+                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                <form method="post">
+                                    <a class="boxed-btn3_lk" href="/update">Редактировать</a>
+                                    <a class="boxed-btn3_lk" href="/create">Добавить новый рецепт</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="recipe_listing_area conteiner mt-5">
+        <div class="recipe_lk_area">
+            <div class="recipe_lists m-0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="lk_recipe_h1">Мои рецепты</h1>
+                        {% for el in recipes%}
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="single_recipes white-bg justify-content-between">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="recipes_left align-items-center">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="recipes_conetent">
+                                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="recipes_right">
+                                                <div class="apply_now">
+                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="lk_recipe_h1">Понравившиеся рецепты</h1>
+                        {% for el in recipes_liked%}
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="single_recipes white-bg justify-content-between">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="recipes_left align-items-center">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="recipes_conetent">
+                                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
 
-<div class="conteiner mt-5">
-    <h1>Личный кабинет</h1>
-    <h1>Добро пожаловать</h1>
-    <h1>{{acc.status}}</h1>
-    <h1>{{ acc.name }} {{ acc.surname }}</h1>
-    <form method="post">
-        <a class="btn btn-warning" href="/logout">Logout</a>
-        <a class="btn btn-warning" href="/update">Редактировать</a>
-        <a class="btn btn-warning" href="/create">Добавить новый рецепт</a>
-    </form>
-    {% for el in recipes %}
-        <div class="col-lg-12 col-md-12">
-                                <div class="single_recipes white-bg justify-content-between">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <div class="recipes_left align-items-center">
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-10">
-                                                        <div class="recipes_conetent">
-                                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
-                                                            <div class="links_locat d-flex align-items-center">
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
-                                                                </div>
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
-                                                                </div>
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
                                                     <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
-                                                    <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                                                    <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
-                                                <div class="date">
-                                                    <p>Добавлено: {{el.date_column}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+            {% for el in recipes %}
+            <div class="col-lg-12 col-md-12">
+                <div class="single_recipes white-bg justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="recipes_left align-items-center">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+                                        </div>
+                                        di
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="recipes_conetent">
+                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
+                                            <div class="links_locat d-flex align-items-center">
+                                                <div class="location">
+                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
+                                                </div>
+                                                <div class="location">
+                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
+                                                </div>
+                                                <div class="location">
+                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    {%endfor%}
-</div>
-    <h1>Ваши лайканые рецептикииииии</h1>
-    {% for el in recipes_liked %}
-        <div class="col-lg-12 col-md-12">
-                                <div class="single_recipes white-bg justify-content-between">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <div class="recipes_left align-items-center">
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-10">
-                                                        <div class="recipes_conetent">
-                                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
-                                                            <div class="links_locat d-flex align-items-center">
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
-                                                                </div>
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
-                                                                </div>
-                                                                <div class="location">
-                                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="recipes_right">
-                                                <div class="apply_now">
-                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
-                                                    <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
-                                                </div>
-                                                <div class="date">
-                                                    <p>Добавлено: {{el.date_column}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="recipes_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                    <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                                </div>
+                                <div class="date">
+                                    <p>Добавлено: {{el.date_column}}</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {%endfor%}
         </div>
+        <h1>Ваши лайканые рецептикииииии</h1>
+        {% for el in recipes_liked %}
+        <div class="col-lg-12 col-md-12">
+            <div class="single_recipes white-bg justify-content-between">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="recipes_left align-items-center">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="recipes_conetent">
+                                        <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
+                                        <div class="links_locat d-flex align-items-center">
+                                            <div class="location">
+                                                <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
+                                            </div>
+                                            <div class="location">
+                                                <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
+                                            </div>
+                                            <div class="location">
+                                                <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="recipes_right">
+                            <div class="apply_now">
+                                <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                            </div>
+                            <div class="date">
+                                <p>Добавлено: {{el.date_column}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%} -->
+    </div>
 
 
     <!-- footer start -->
@@ -210,7 +306,6 @@
         </div>
     </footer>
     <!--/ footer end  -->
-
     <!-- link that opens popup -->
     <!-- JS here -->
     <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -246,21 +341,21 @@
     <script src="../static/js/main.js"></script>
 
 
-	<script>
-        $( function() {
-            $( "#slider-range" ).slider({
+    <script>
+        $(function () {
+            $("#slider-range").slider({
                 range: true,
                 min: 0,
                 max: 24600,
-                values: [ 750, 24600 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                values: [750, 24600],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1] + "/ Year");
                 }
             });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
-        } );
-        </script>
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1) + "/ Year");
+        });
+    </script>
 </body>
 
 </html>
