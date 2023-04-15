@@ -3599,7 +3599,14 @@ h3 {
         margin: 10px 0;
     }
 }
-
+.heart_mark_liked {
+    background: #9f142b !important;
+    color: #fff !important;
+}
+    .heart_mark_liked:hover {
+        background: #fcf3e6 !important;
+        color: #9f142b !important;
+    }
 /* line 87, ../../Arafath/CL/December/235. recipe board/HTML/scss/_recipe_list.scss */
 .recipe_listing_area .recipe_lists .single_recipes .recipes_right .apply_now a.heart_mark {
     width: 40px;

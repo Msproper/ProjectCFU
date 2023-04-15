@@ -170,7 +170,12 @@
                                         <div class="col-lg-4">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    {% if liked %}
+                                                    <a class="heart_mark heart_mark_liked" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
+                                                    {%else%}
+                                                    <a class="heart_mark" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
+                                                    {%endif%}
+                                                    <!--<a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>-->
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
 

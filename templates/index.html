@@ -94,9 +94,16 @@
                             <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s" color="#9f142b">4536+ Рецептов</h5>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Найди свой рецепт мечты</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Мы поможем вам найти рецепт в сообстветствии со всеми вашими пожеланиями</p>
+                            {% if acc %}
+                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                <a href="recipes" class="boxed-btn3">Найти рецепт</a>
+                            </div>
+                            {% else %}
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                                 <a href="register" class="boxed-btn3">Зарегистироваться сейчас</a>
                             </div>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -108,7 +115,7 @@
     <div class="catagory_area">
         <div class="container">
             <div class="row cat_search">
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-6 col-md-6">
                     <div class="single_input">
                         <input type="text" placeholder="Ключевое слово">
                     </div>
@@ -159,7 +166,7 @@
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', country='Русская') }}"><h4>Русская кухня</h4></a>
+                        <a href="{{ url_for('recipes', country='Русская ') }}"><h4>Русская кухня</h4></a>
                         <p> <span>120</span> Рецептов</p>
                     </div>
                 </div>
@@ -171,7 +178,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', country='Итальянская') }}"><h4>Итальянская кухня</h4></a>
+                        <a href="{{ url_for('recipes', country='Итальянская ') }}"><h4>Итальянская кухня</h4></a>
                         <p> <span>100</span> Рецептов</p>
                     </div>
                 </div>
@@ -183,13 +190,13 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', min_time='5', max_time='15') }}"><h4>Быстрые блюда 5-15 минут</h4></a>
+                        <a href="{{ url_for('recipes', min_time='5', max_time='15') }}"><h4>Быстрые блюда</h4></a>
                         <p> <span>110</span> Рецептов</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', calories_low=0, calories_up=200) }}"><h4> Некалорийные блюда</h4></a>
+                        <a href="{{ url_for('recipes', calories_low=0, calories_up=200) }}"><h4>Легкие блюда</h4></a>
                         <p> <span>100</span> Рецептов</p>
                     </div>
                 </div>
@@ -201,7 +208,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{{ url_for('recipes', category='Французкая') }}"><h4>Французкая кухня</h4></a>
+                        <a href="{{ url_for('recipes', category='Французкая ') }}"><h4>Французкая кухня</h4></a>
                         <p> <span>100</span> Рецептов</p>
                     </div>
                 </div>
@@ -224,7 +231,12 @@
                     <div class="searching_text">
                         <h3>Поделитесь рецептом</h3>
                         <p>Если вы знаете вкусные и интересные блюда, обязательно поделитесь ими со всем миром. </p>
-                        <a href="#" class="boxed-btn3">Выложить рецепт</a>
+                        {% if acc %}
+                        <a href="create" class="boxed-btn3">Выложить рецепт</a>
+                        {% else %}
+                        <a href="login" class="boxed-btn3">Выложить рецепт</a>
+                        {% endif %}
+                        
                     </div>
                 </div>
             </div>
@@ -282,7 +294,7 @@
                                         <div class="col-lg-3">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
                                                     <!--<p> {{ el.likes }} </p>-->
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>

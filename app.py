@@ -124,6 +124,7 @@ def recipes():
         recipes = recipes.filter(Recipe.name.ilike(f'%{keyword}%'))
     if ingredient:
         recipes = recipes.filter(Recipe.ingredients.ilike(f'%{ingredient}%'))
+    print(country)
     if not(country=="Кухня") and country:
         recipes = recipes.filter_by(country=country)
     if not (category == "Категория") and category:
@@ -136,7 +137,9 @@ def recipes():
         recipes = recipes.filter(Recipe.calories > calories_low)
     if calories_up:
         recipes = recipes.filter(Recipe.calories < calories_up)
+    print(recipes)
     recipes = recipes.all()
+    print(recipes)
     return render_template('recipes.html', recipes=recipes, acc=acc)
 
 

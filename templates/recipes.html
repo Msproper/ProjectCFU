@@ -123,40 +123,40 @@
                                         <div class="single_field">
                                             <select class="wide" name="country" id="country">
                                                 <option data-display="Кухня">Кухня</option>
-                                                <option value= "Русская">Русская(81)</option>
-                                                <option value= "Европейская">Европейская(55)</option>
-                                                <option value= "Итальянская">Итальянская(51)</option>
-                                                <option value= "Французская">Французская(51)</option>
-                                                <option value= "Американская">Американская(41)</option>
-                                                <option value= "Китайская">Китайская(14)</option>
-                                                <option value= "Грузинская">Грузинская(9)</option>
-                                                <option value= "Советская">Советская(7)</option>
-                                                <option value= "Испанская">Испанская(7)</option>
-                                                <option value= "Еврейская">Еврейская(6)</option>
-                                                <option value= "Британская">Британская(6)</option>
-                                                <option value= "Узбекская">Узбекская(6)</option>
-                                                <option value= "Паназиатская">Паназиатская(6)</option>
-                                                <option value= "Украинская">Украинская(5)</option>
-                                                <option value= "Греческая">Греческая(4)</option>
-                                                <option value= "Авторская">Авторская(4)</option>
-                                                <option value= "Средиземноморская">Средиземноморская(4)</option>
-                                                <option value= "Турецкая">Турецкая(4)</option>
-                                                <option value= "Польская">Польская(3)</option>
-                                                <option value= "Мексиканская">Мексиканская(3)</option>
-                                                <option value= "Татарская">Татарская(3)</option>
-                                                <option value= "Венгерская">Венгерская(3)</option>
-                                                <option value= "Азербайджанская">Азербайджанская(3)</option>
-                                                <option value= "Индийская">Индийская(2)</option>
-                                                <option value= "Мировая">Мировая(2)</option>
-                                                <option value= "Японская">Японская(2)</option>
-                                                <option value= "Австрийская">Австрийская(2)</option>
-                                                <option value= "Белорусская">Белорусская(2)</option>
-                                                <option value= "Армянская">Армянская(2)</option>
-                                                <option value= "Мировая">Мировая(2)</option>
-                                                <option value= "Чешска">Чешская(2)</option>
-                                                <option value= "Тайская">Тайская(2)</option>
-                                                <option value= "Бельгийская">Бельгийская(1)</option>
-                                                <option value= "Немецкая">Немецкая(1)</option>
+                                                <option value= "Русская ">Русская(81)</option>
+                                                <option value= "Европейская ">Европейская(55)</option>
+                                                <option value= "Итальянская ">Итальянская(51)</option>
+                                                <option value= "Французская ">Французская(51)</option>
+                                                <option value= "Американская ">Американская(41)</option>
+                                                <option value= "Китайская ">Китайская(14)</option>
+                                                <option value= "Грузинская ">Грузинская(9)</option>
+                                                <option value= "Советская ">Советская(7)</option>
+                                                <option value= "Испанская ">Испанская(7)</option>
+                                                <option value= "Еврейская ">Еврейская(6)</option>
+                                                <option value= "Британская ">Британская(6)</option>
+                                                <option value= "Узбекская ">Узбекская(6)</option>
+                                                <option value= "Паназиатская ">Паназиатская(6)</option>
+                                                <option value= "Украинская ">Украинская(5)</option>
+                                                <option value= "Греческая ">Греческая(4)</option>
+                                                <option value= "Авторская ">Авторская(4)</option>
+                                                <option value= "Средиземноморская ">Средиземноморская(4)</option>
+                                                <option value= "Турецкая ">Турецкая(4)</option>
+                                                <option value= "Польская ">Польская(3)</option>
+                                                <option value= "Мексиканская ">Мексиканская(3)</option>
+                                                <option value= "Татарская ">Татарская(3)</option>
+                                                <option value= "Венгерская ">Венгерская(3)</option>
+                                                <option value= "Азербайджанская ">Азербайджанская(3)</option>
+                                                <option value= "Индийская ">Индийская(2)</option>
+                                                <option value= "Мировая ">Мировая(2)</option>
+                                                <option value= "Японская ">Японская(2)</option>
+                                                <option value= "Австрийская ">Австрийская(2)</option>
+                                                <option value= "Белорусская ">Белорусская(2)</option>
+                                                <option value= "Армянская ">Армянская(2)</option>
+                                                <option value= "Мировая ">Мировая(2)</option>
+                                                <option value= "Чешская ">Чешская(2)</option>
+                                                <option value= "Тайская ">Тайская(2)</option>
+                                                <option value= "Бельгийская ">Бельгийская(1)</option>
+                                                <option value= "Немецкая ">Немецкая(1)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -253,7 +253,12 @@
                                         <div class="col-lg-3">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    {% if liked %}
+                                                    <a class="heart_mark heart_mark_liked" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
+                                                    {%else%}
+                                                    <a class="heart_mark" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
+                                                    {%endif%}
+                                                    <!--<a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>-->
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
                                                 <div class="date">

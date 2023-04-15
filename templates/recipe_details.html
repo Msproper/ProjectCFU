@@ -128,9 +128,9 @@
                             <div class="recipes_right">
                                 <div class="apply_now">
                                     {% if liked %}
-                                        <a class="fa fa-clock-o" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
+                                    <a class="heart_mark heart_mark_liked" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> {{ recipe.likes }}</a>
                                     {%else%}
-                                        <a class="heart_mark" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> </a>
+                                    <a class="heart_mark" href="/like/{{recipe.id}}"> <i class="ti-heart"></i> {{ recipe.likes }}</a>
                                     {%endif%}
                                 </div>
                             </div>
