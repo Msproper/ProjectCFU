@@ -48,7 +48,6 @@
                                         <ul id="navigation">
                                             <li><a href="/index">Главная</a></li>
                                             <li><a href="/recipes">Поиск рецептов</a></li>
-                                            <li><a href="/elements">Элементы</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -118,7 +117,6 @@
                                                 <div class="row">
                                                     <div class="col-lg-3">
                                                         <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-9">
@@ -132,7 +130,6 @@
                                         <div class="col-lg-4">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
                                             </div>
@@ -155,13 +152,11 @@
                                                 <div class="row">
                                                     <div class="col-lg-3">
                                                         <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-9">
                                                         <div class="recipes_conetent">
                                                             <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,12 +165,10 @@
                                         <div class="col-lg-4">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    {% if liked %}
-                                                    <a class="heart_mark heart_mark_liked" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
-                                                    {%else%}
-                                                    <a class="heart_mark" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
-                                                    {%endif%}
-                                                    <!--<a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>-->
+                                                    <a class="heart_mark {% if el.id in likes%} heart_mark_liked {%endif%}" data-recipe-id="{{ el.id }}" id="Heart_id_{{el.id}}">
+                                                      <i class="ti-heart"></i>
+                                                      <span id="recipe-{{ el.id }}">{{ el.likes }}</span>
+                                                    </a>
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
 
@@ -190,101 +183,6 @@
                 </div>
             </div>
         </div>
-        <!--
-            {% for el in recipes %}
-            <div class="col-lg-12 col-md-12">
-                <div class="single_recipes white-bg justify-content-between">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="recipes_left align-items-center">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                        </div>
-                                        di
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="recipes_conetent">
-                                            <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
-                                            <div class="links_locat d-flex align-items-center">
-                                                <div class="location">
-                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
-                                                </div>
-                                                <div class="location">
-                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
-                                                </div>
-                                                <div class="location">
-                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="recipes_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
-                                    <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
-                                </div>
-                                <div class="date">
-                                    <p>Добавлено: {{el.date_column}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {%endfor%}
-        </div>
-        <h1>Ваши лайканые рецептикииииии</h1>
-        {% for el in recipes_liked %}
-        <div class="col-lg-12 col-md-12">
-            <div class="single_recipes white-bg justify-content-between">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="recipes_left align-items-center">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="recipes_conetent">
-                                        <a href="/recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
-                                        <div class="links_locat d-flex align-items-center">
-                                            <div class="location">
-                                                <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
-                                            </div>
-                                            <div class="location">
-                                                <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
-                                            </div>
-                                            <div class="location">
-                                                <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="recipes_right">
-                            <div class="apply_now">
-                                <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
-                                <a href="/recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
-                            </div>
-                            <div class="date">
-                                <p>Добавлено: {{el.date_column}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {%endfor%} -->
     </div>
 
 
@@ -344,8 +242,7 @@
 
 
     <script src="../static/js/main.js"></script>
-
-
+    <script src="../static/js/like_func.js"></script>
     <script>
         $(function () {
             $("#slider-range").slider({

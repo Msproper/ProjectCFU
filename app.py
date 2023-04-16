@@ -1,6 +1,5 @@
 
-from flask import Flask, render_template, url_for, request, redirect
-from datetime import datetime
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from DBclasses import Users, UserAccount, Recipe, db
 import re
@@ -84,7 +83,7 @@ def index():
 
 @app.route('/recipes', methods=['POST', 'GET'])
 def recipes():
-    keyword = None
+    keyword = ""
     country = None
     category = None
     min_time = None
@@ -96,8 +95,10 @@ def recipes():
     recipes = Recipe.query
     user = current_user
     acc = None
+    likes = []
     if current_user.is_authenticated:
         acc = user.acc.first()
+        likes = list(map(int, user.liked_rec.split(' ')))
     if request.method == "POST":
         fast_sort = request.form.get('fast_sort')
         keyword = request.form['keyword']
@@ -122,9 +123,10 @@ def recipes():
         recipes = recipes.order_by(db.asc(Recipe.date_column))
     if keyword:
         recipes = recipes.filter(Recipe.name.ilike(f'%{keyword}%'))
+    else:
+        keyword = ""
     if ingredient:
         recipes = recipes.filter(Recipe.ingredients.ilike(f'%{ingredient}%'))
-    print(country)
     if not(country=="Кухня") and country:
         recipes = recipes.filter_by(country=country)
     if not (category == "Категория") and category:
@@ -137,33 +139,56 @@ def recipes():
         recipes = recipes.filter(Recipe.calories > calories_low)
     if calories_up:
         recipes = recipes.filter(Recipe.calories < calories_up)
-    print(recipes)
     recipes = recipes.all()
-    print(recipes)
-    return render_template('recipes.html', recipes=recipes, acc=acc)
+    return render_template('recipes.html', recipes=recipes, acc=acc, category=category,
+                           country=country, keyword=keyword,
+                           fast_sort=fast_sort, max_time=max_time, min_time=min_time, likes=likes)
 
 
 @app.route('/create/<int:id>', methods=['POST', 'GET'])
 @app.route('/create', methods=['POST', 'GET'])
 def create(id=None):
+    user = current_user
+    if current_user.is_authenticated:
+        acc = user.acc.first()
     if request.method == "POST":
+        name = request.form['name']
+        country = request.form['country']
+        description = request.form['description']
+        text = request.form['text']
+        category = request.form.get('category')
+        ingredient_name = request.form['ingredient_name']
+        ingredient_mass = request.form['ingredient_mass']
+        ingr_names = {key:value for key, value in zip(ingredient_name.split(", "), ingredient_mass.split(", "))}
+        ingredients = str(ingr_names.items())[12:-2]
         if id:
             recipe = Recipe.query.filter_by(id=id).first()
-            recipe.name = request.form['name']
-            recipe.country = request.form['country']
-            recipe.description= request.form['description']
-            recipe.text = request.form['text']
-            recipe.category = request.form.get('category')
-            # recipe.request.form['ingredient_name']
+            recipe.name=name
+            recipe.category=category
+            recipe.country=country
+            recipe.description=description
+            recipe.text=text
+            recipe.ingredients=ingredients
+            recipe.author_id=user.id
+            db.session.commit()
             return redirect(url_for("recipe_details", id=id))
         else:
-            return redirect(url_for("recipe_details", id=id))
+            recipe = Recipe(name=name,
+                            category=category,
+                            country=country,
+                            description=description,
+                            text=text,
+                            ingredients=ingredients,
+                            author_id=user.id)
+            db.session.add(recipe)
+            db.session.commit()
+            return redirect(url_for("recipe_details", id=recipe.id))
     else:
         if id:
             recipe = Recipe.query.filter_by(id=id).first()
-            return render_template("create.html", recipe=recipe)
+            return render_template("create.html", recipe=recipe, acc=acc)
         else:
-            return render_template("create.html", recipe=None)
+            return render_template("create.html", recipe=None, acc=acc)
 @app.route('/recipe_details/<int:id>')
 def recipe_details(id):
     recipe = Recipe.query.filter_by(id=id).first()
@@ -189,7 +214,7 @@ def recipe_details(id):
         ingr[item[0]] = item[1]
     return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable, liked=liked)
 
-@app.route('/like/<int:id>')
+@app.route('/like/<int:id>', methods=['POST'])
 def like(id):
     user = current_user
     if not (current_user.is_authenticated):
@@ -208,7 +233,7 @@ def like(id):
             recipe.likes += 1
         user.liked_rec = ' '.join(map(str, list))
         db.session.commit()
-    return redirect(url_for('recipe_details', id=id))
+        return jsonify({'likes': recipe.likes})
 
 
 
@@ -220,16 +245,12 @@ def user():
     if current_user.is_authenticated:
         acc = user.acc.first()
     if user.liked_rec:
-        list = [int(x) for x in user.liked_rec.split(' ')]
+        likes = list(map(int, user.liked_rec.split(' ')))
     else:
-        list = []
+        likes = []
     recipes = user.recipes.all()
-    recipes_liked = Recipe.query.filter(Recipe.id.in_(list)).all()
-    if len(recipes)>5:
-        recipes = recipes[:5]
-    else:
-        recipes = recipes[:len(recipes)-1]
-    return render_template('user.html', acc=acc, recipes=recipes, recipes_liked=recipes_liked)
+    recipes_liked = Recipe.query.filter(Recipe.id.in_(likes)).all()
+    return render_template('user.html', acc=acc, recipes=recipes, recipes_liked=recipes_liked, likes=likes)
 
 @app.route('/update', methods=['POST', 'GET'])
 @login_required

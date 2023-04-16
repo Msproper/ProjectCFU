@@ -54,7 +54,6 @@
                                         <ul id="navigation">
                                             <li><a href="/index">Главная</a></li>
                                             <li><a href="/recipes">Поиск рецептов</a></li>
-                                            <li><a href="/elements">Элементы</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -116,65 +115,59 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <input type="text" name="keyword" id="keyword" placeholder="Ключевое слово">
+                                            <input type="text" name="keyword" id="keyword" placeholder="Ключевое слово" value="{{keyword}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
                                             <select class="wide" name="country" id="country">
                                                 <option data-display="Кухня">Кухня</option>
-                                                <option value= "Русская ">Русская(81)</option>
-                                                <option value= "Европейская ">Европейская(55)</option>
-                                                <option value= "Итальянская ">Итальянская(51)</option>
-                                                <option value= "Французская ">Французская(51)</option>
-                                                <option value= "Американская ">Американская(41)</option>
-                                                <option value= "Китайская ">Китайская(14)</option>
-                                                <option value= "Грузинская ">Грузинская(9)</option>
-                                                <option value= "Советская ">Советская(7)</option>
-                                                <option value= "Испанская ">Испанская(7)</option>
-                                                <option value= "Еврейская ">Еврейская(6)</option>
-                                                <option value= "Британская ">Британская(6)</option>
-                                                <option value= "Узбекская ">Узбекская(6)</option>
-                                                <option value= "Паназиатская ">Паназиатская(6)</option>
-                                                <option value= "Украинская ">Украинская(5)</option>
-                                                <option value= "Греческая ">Греческая(4)</option>
-                                                <option value= "Авторская ">Авторская(4)</option>
-                                                <option value= "Средиземноморская ">Средиземноморская(4)</option>
-                                                <option value= "Турецкая ">Турецкая(4)</option>
-                                                <option value= "Польская ">Польская(3)</option>
-                                                <option value= "Мексиканская ">Мексиканская(3)</option>
-                                                <option value= "Татарская ">Татарская(3)</option>
-                                                <option value= "Венгерская ">Венгерская(3)</option>
-                                                <option value= "Азербайджанская ">Азербайджанская(3)</option>
-                                                <option value= "Индийская ">Индийская(2)</option>
-                                                <option value= "Мировая ">Мировая(2)</option>
-                                                <option value= "Японская ">Японская(2)</option>
-                                                <option value= "Австрийская ">Австрийская(2)</option>
-                                                <option value= "Белорусская ">Белорусская(2)</option>
-                                                <option value= "Армянская ">Армянская(2)</option>
-                                                <option value= "Мировая ">Мировая(2)</option>
-                                                <option value= "Чешская ">Чешская(2)</option>
-                                                <option value= "Тайская ">Тайская(2)</option>
-                                                <option value= "Бельгийская ">Бельгийская(1)</option>
-                                                <option value= "Немецкая ">Немецкая(1)</option>
+                                                <option value= "Русская "{%if country == 'Русская '%}selected{% endif %} >Русская(81)</option>
+                                                <option value= "Европейская "{%if country == 'Европейская '%}selected{% endif %}>Европейская(55)</option>
+                                                <option value= "Итальянская "{%if country == 'Итальянская '%}selected{% endif %}>Итальянская(51)</option>
+                                                <option value= "Французская "{%if country == 'Французская '%}selected{% endif %}>Французская(51)</option>
+                                                <option value= "Американская "{%if country == 'Американская '%}selected{% endif %}>Американская(41)</option>
+                                                <option value= "Китайская "{%if country == 'Китайская '%}selected{% endif %}>Китайская(14)</option>
+                                                <option value= "Грузинская "{%if country == 'Грузинская '%}selected{% endif %}>Грузинская(9)</option>
+                                                <option value= "Советская "{%if country == 'Советская '%}selected{% endif %}>Советская(7)</option>
+                                                <option value= "Испанская "{%if country == 'Испанская '%}selected{% endif %}>Испанская(7)</option>
+                                                <option value= "Еврейская "{%if country == 'Еврейская '%}selected{% endif %}>Еврейская(6)</option>
+                                                <option value= "Британская "{%if country == 'Британская '%}selected{% endif %}>Британская(6)</option>
+                                                <option value= "Узбекская "{%if country == 'Узбекская '%}selected{% endif %}>Узбекская(6)</option>
+                                                <option value= "Паназиатская "{%if country == 'Паназиатская '%}selected{% endif %}>Паназиатская(6)</option>
+                                                <option value= "Украинская "{%if country == 'Украинская '%}selected{% endif %}>Украинская(5)</option>
+                                                <option value= "Греческая "{%if country == 'Греческая '%}selected{% endif %}>Греческая(4)</option>
+                                                <option value= "Авторская "{%if country == 'Авторская '%}selected{% endif %}>Авторская(4)</option>
+                                                <option value= "Средиземноморская "{%if country == '"Средиземноморская '%}selected{% endif %}>Средиземноморская(4)</option>
+                                                <option value= "Турецкая "{%if country == 'Турецкая '%}selected{% endif %}>Турецкая(4)</option>
+                                                <option value= "Польская "{%if country == 'Польская '%}selected{% endif %}>Польская(3)</option>
+                                                <option value= "Мексиканская "{%if country == 'Мексиканская '%}selected{% endif %}>Мексиканская(3)</option>
+                                                <option value= "Татарская "{%if country == 'Татарская '%}selected{% endif %}>Татарская(3)</option>
+                                                <option value= "Японская "{%if country == 'Японская '%}selected{% endif %}Японская(2)</option>
+                                                <option value= "Австрийская "{%if country == 'Австрийская '%}selected{% endif %}>Австрийская(2)</option>
+                                                <option value= "Белорусская "{%if country == 'Белорусская '%}selected{% endif %}>Белорусская(2)</option>
+                                                <option value= "Армянская "{%if country == 'Армянская '%}selected{% endif %}>Армянская(2)</option>
+                                                <option value= "Мировая "{%if country == 'Мировая '%}selected{% endif %}>Мировая(2)</option>
+                                                <option value= "Чешская "{%if country == 'Чешская '%}selected{% endif %}>Чешская(2)</option>
+                                                <option value= "Тайская "{%if country == 'Тайская '%}selected{% endif %}>Тайская(2)</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide" name="category" id="category">
-                                                <option data-display="Категория">Категория</option>
-                                                <option value= "Выпечка и десерты">Выпечка и десерты(188)</option>
-                                                <option value= "Основные блюда">Основные блюда(161)</option>
-                                                <option value= "Супы">Супы(75)</option>
-                                                <option value= "Завтраки">Завтраки(72)</option>
-                                                <option value= "Закуски">Закуски(64)</option>
-                                                <option value= "Салаты">Салаты(55)</option>
-                                                <option value= "Паста и пицца">Паста и пицца(38)</option>
-                                                <option value= "Сэндвичи">Сэндвичи(10)</option>
-                                                <option value= "Напитки">Напитки(10)</option>
-                                                <option value= "Ризотто">Ризотто(7)</option>
-                                                <option value= "Соусы и маринады">Соусы и маринады(6)</option>
+                                            <select class="wide" name="category" id="category" >
+                                                <option data-display="Категория" {%if category == 'Категория'%}selected{% endif %}>Категория</option>
+                                                <option value= "Выпечка и десерты" {%if category == 'Выпечка и десерты'%}selected{% endif %} >Выпечка и десерты(188)</option>
+                                                <option value= "Основные блюда"{%if category == 'Основные блюда'%}selected{% endif %}>Основные блюда(161)</option>
+                                                <option value= "Супы"{%if category == 'Супы'%}selected{% endif %}>Супы(75)</option>
+                                                <option value= "Завтраки"{%if category == 'Завтраки'%}selected{% endif %}>Завтраки(72)</option>
+                                                <option value= "Закуски"{%if category == 'Закуски'%}selected{% endif %}>Закуски(64)</option>
+                                                <option value= "Салаты"{%if category == 'Салаты'%}selected{% endif %}>Салаты(55)</option>
+                                                <option value= "Паста и пицца"{%if category == 'Паста и пицца'%}selected{% endif %}>Паста и пицца(38)</option>
+                                                <option value= "Сэндвичи"{%if category == 'Сэндвичи'%}selected{% endif %}>Сэндвичи(10)</option>
+                                                <option value= "Напитки"{%if category == 'Напитки'%}selected{% endif %}>Напитки(10)</option>
+                                                <option value= "Ризотто"{%if category == 'Ризотто'%}selected{% endif %}>Ризотто(7)</option>
+                                                <option value= "Соусы и маринады"{%if category == 'Соусы и маринады'%}selected{% endif %}>Соусы и маринады(6)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -182,20 +175,20 @@
                                         <div class="single_field">
                                             <select class="wide" name="fast_sort" id="fast_sort">
                                                 <option data-display="Сортировать">Сортировать</option>
-                                                <option value="1">По популярности</option>
-                                                <option value="2">Сначала новые</option>
-                                                <option value="3">Сначала старые</option>
+                                                <option value="1"{%if fast_sort == '1' %}selected{% endif %}>По популярности</option>
+                                                <option value="2"{%if fast_sort == '2'%}selected{% endif %}>Сначала новые</option>
+                                                <option value="3"{%if fast_sort == '3'%}selected{% endif %}>Сначала старые</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                                <input type="number" name="min_time" id="min" placeholder="Время от">
+                                                <input type="number" name="min_time" id="min" placeholder="Время от" value="{{min_time}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                                <input type="number" name="max_time" id="max" placeholder="Время до">
+                                                <input type="number" name="max_time" id="max" placeholder="Время до" value="{{max_time}}">
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +221,6 @@
                                                 <div class="row">
                                                     <div class="col-lg-2">
                                                         <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
-                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10">
@@ -253,12 +245,10 @@
                                         <div class="col-lg-3">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    {% if liked %}
-                                                    <a class="heart_mark heart_mark_liked" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
-                                                    {%else%}
-                                                    <a class="heart_mark" href="/like/{{el.id}}"> <i class="ti-heart"></i> {{ el.likes }}</a>
-                                                    {%endif%}
-                                                    <!--<a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>-->
+                                                   <a class="heart_mark {% if el.id in likes%} heart_mark_liked {%endif%}" data-recipe-id="{{ el.id }}" id="Heart_id_{{el.id}}">
+                                                      <i class="ti-heart"></i>
+                                                      <span id="recipe-{{ el.id }}">{{ el.likes }}</span>
+                                                    </a>
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
                                                 <div class="date">
@@ -323,7 +313,7 @@
     <script src="../static/js/plugins.js"></script>
     <!-- <script src="js/gijgo.min.js"></script> -->
     <script src="../static/js/range.js"></script>
-
+    <script src="../static/js/scroll.js"></script>
 
 
     <!--contact js-->
@@ -332,11 +322,8 @@
     <script src="../static/js/jquery.form.js"></script>
     <script src="../static/js/jquery.validate.min.js"></script>
     <script src="../static/js/mail-script.js"></script>
-
-
     <script src="../static/js/main.js"></script>
-
-
+    <script src="../static/js/like_func.js"></script>
 	<script>
         $( function() {
             $( "#slider-range" ).slider({
@@ -352,6 +339,7 @@
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
         } );
         </script>
+
 </body>
 
 </html>
