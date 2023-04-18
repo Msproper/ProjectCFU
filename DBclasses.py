@@ -10,7 +10,7 @@ class Users(UserMixin, db.Model):
     acc = db.relationship('UserAccount', backref='user', lazy='dynamic')
     recipes = db.relationship('Recipe', backref='author', lazy='dynamic')
     email = db.Column(db.String(80), unique=True)
-    liked_rec = db.Column(db.Text)
+    liked_rec = db.Column(db.Text, default="0")
 
 
 class UserAccount(db.Model):
@@ -40,3 +40,12 @@ class Recipe(db.Model):
     photo_arr = db.Column(db.Text)
     date_column = db.Column(db.Date, default=datetime.date.today)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
+class Comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    id_user = db.Column(db.Integer)
+    id_recipe = db.Column(db.Integer)
+    text = db.Column(db.Text)
+    date = db.Column(db.Date, default=datetime.date.today)

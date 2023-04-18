@@ -1,10 +1,10 @@
 
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from DBclasses import Users, UserAccount, Recipe, db
+from DBclasses import Users, UserAccount, Recipe, db, Comments
 import re
 import ast
-
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -122,7 +122,7 @@ def recipes():
     else:
         recipes = recipes.order_by(db.asc(Recipe.date_column))
     if keyword:
-        recipes = recipes.filter(Recipe.name.ilike(f'%{keyword}%'))
+        recipes = recipes.filter(func.lower(Recipe.name).like(f'%{keyword}%'))
     else:
         keyword = ""
     if ingredient:
@@ -189,30 +189,43 @@ def create(id=None):
             return render_template("create.html", recipe=recipe, acc=acc)
         else:
             return render_template("create.html", recipe=None, acc=acc)
-@app.route('/recipe_details/<int:id>')
+@app.route('/recipe_details/<int:id>', methods=['POST', 'GET'])
 def recipe_details(id):
-    recipe = Recipe.query.filter_by(id=id).first()
-    text = [x for x in recipe.text[1:-1].split("', '")]
-    lst = ast.literal_eval(recipe.ingredients)
-    author = recipe.author.acc.first()
-    ingr = {}
-    user = current_user
-    liked = False
-    redactable = False
-    acc = None
-    if current_user.is_authenticated:
-        if user.acc.first() == author:
-            redactable = True
-        if user.liked_rec:
-            list = [int(x) for x in user.liked_rec.split(' ')]
+    if request.method=="POST":
+        comment_text = request.form['comment']
+        if current_user.is_authenticated:
+            user = current_user
+            acc = user.acc.first()
+            comment = Comments(id_user=user.id, id_recipe=id, text=comment_text, name=acc.name)
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for("recipe_details", id=id))
         else:
-            list = []
-        if id in list:
-            liked = True
-        acc = user.acc.first()
-    for item in lst:
-        ingr[item[0]] = item[1]
-    return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable, liked=liked)
+            return redirect('/login')
+    else:
+        recipe = Recipe.query.filter_by(id=id).first()
+        text = [x for x in recipe.text[1:-1].split("', '")]
+        lst = ast.literal_eval(recipe.ingredients)
+        author = recipe.author.acc.first()
+        ingr = {}
+        user = current_user
+        liked = False
+        redactable = False
+        acc = None
+        if current_user.is_authenticated:
+            if user.acc.first() == author:
+                redactable = True
+            if user.liked_rec:
+                list = [int(x) for x in user.liked_rec.split(' ')]
+            else:
+                list = []
+            if id in list:
+                liked = True
+            acc = user.acc.first()
+        for item in lst:
+            ingr[item[0]] = item[1]
+        comments = Comments.query.filter(Comments.id_recipe == id).all()
+        return render_template('recipe_details.html', recipe=recipe, ingr=ingr, text=text, acc=acc, author=author, redactable=redactable, liked=liked, comments=comments)
 
 @app.route('/like/<int:id>', methods=['POST'])
 def like(id):

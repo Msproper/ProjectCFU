@@ -169,22 +169,12 @@
                     </div>
                     <div class="comment-form">
                         <h4>Оставьте отзыв</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
+                        <form class="form-contact comment_form" id="commentForm" method="POST">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
                                                   placeholder="Напишите отзыв"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Имя">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Почта">
                                     </div>
                                 </div>
                             </div>
@@ -195,84 +185,30 @@
                     </div>
                     <div class="comments-area">
                         <h4>05 Коментариев</h4>
+                        {% for el in comments%}
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="../static/img/comment/comment_1.png" alt="">
+                                        <img src="../static/img/avatar.jpg" alt="">
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                            {{el.text}}
                                         </p>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <h5>
-                                                    <a href="#">Emilly Blunt</a>
+                                                    <a>{{el.name}}</a>
                                                 </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
+                                                <p class="date">{{el.date}} </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../static/img/comment/comment_2.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../static/img/comment/comment_3.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {%endfor%}
                     </div>
                 </div>
                 <div class="col-lg-4">

@@ -112,28 +112,19 @@
     <!-- slider_area_end -->
     <!-- catagory_area -->
     <div class="catagory_area">
+        <form action="/recipes" method="get">
         <div class="container">
             <div class="row cat_search">
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_input">
-                        <input type="text" placeholder="Ключевое слово">
+                    <div class="col-lg-9 col-md-9">
+                        <div class="single_input">
+                                  <input type="text" name="keyword" placeholder="Ключевое слово">
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <select class="wide">
-                            <option data-display="Категория">Категория</option>
-                            <option value="1">Категория 1</option>
-                            <option value="2">Категория 2</option>
-                            <option value="3">Категория 3</option>
-                        </select>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="find_btn">
+                            <button type="submit" class="boxed-btn3">Найти</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-12">
-                    <div class="find_btn">
-                        <a href="{{ url_for('recipes', ingredient='Сырники') }}" class="boxed-btn3">Найти</a>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -150,6 +141,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <!--/ catagory_area -->
     <!-- popular_catagory_area_start  -->
@@ -293,8 +285,7 @@
                                         <div class="col-lg-3">
                                             <div class="recipes_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="/recipe_details/{{ el.id }}"> <i class="ti-heart"></i> {{ el.likes }} </a>
-                                                    <!--<p> {{ el.likes }} </p>-->
+                                                    <a class="heart_mark"> <i class="ti-heart"></i> {{ el.likes }} </a>
                                                     <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
                                                 </div>
                                                 <div class="date">
