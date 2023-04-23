@@ -19,6 +19,9 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
+
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
@@ -189,6 +192,9 @@ def create(id=None):
             return render_template("create.html", recipe=recipe, acc=acc)
         else:
             return render_template("create.html", recipe=None, acc=acc)
+
+
+        
 @app.route('/recipe_details/<int:id>', methods=['POST', 'GET'])
 def recipe_details(id):
     if request.method=="POST":
