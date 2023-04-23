@@ -48,6 +48,7 @@
                                         <ul id="navigation">
                                             <li><a href="/index">Главная</a></li>
                                             <li><a href="/recipes">Поиск рецептов</a></li>
+                                            <li><a href="#">О создателях</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -84,13 +85,18 @@
                 <label>Пароль:</label>
                 <input type="password" name="password" id="password" class="form-control">
             </div>
-            <div class="pl1 reset_btn">
-                <button class="boxed-btn3 w-100 btn btn-success" type="submit">Войти</button>
+            {% if error %}
+            <div class="group">
+                <div style="background-color: #ffa1a1; text-align: center; height: 50px; border-radius: 5px; border: solid 1px #da2536; ">
+                    <p style="color: #da2536; margin: 0; line-height: 50px;">{{ error }}</p>
+                </div>
             </div>
+                {% endif %}
+                <div class="pl1 reset_btn">
+                    <button class="boxed-btn3 w-100 btn btn-success" type="submit">Войти</button>
+                </div>
         </form>
-        {% if error %}
-        <p style="color:red">{{ error }}</p>
-        {% endif %}
+        
     </div>
 
     <footer class="footer">

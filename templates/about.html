@@ -1,0 +1,216 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EDA!!!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/gijgo.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.css">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area " style="background-color: #f1be16">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="index">
+                                        <img src="../static/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index">Главная</a></li>
+                                            <li><a href="recipes">Поиск рецептов</a></li>
+                                            <li><a href="#">О создателях</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+                                    {% if acc %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/logout">Log out</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/login">Sign in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/register">Sign up</a>
+                                    </div>
+                                    {%endif%}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <h2 style="text-align:center; margin-top: 150px; margin-bottom: 50px;">Наша команда</h2>
+    <div class="row" style="margin-bottom: 50px;">
+        <div class="column-a">
+            <div class="card-a">
+                <img src="../static/img/Nika.jpg" alt="Jane" style="width:100%">
+                <div class="container-a">
+                    <h2>Долгирева Вероника</h2>
+                    <p class="title-a">Frontend & Designer</p>
+                    <p>Разработала дизайн и сверстала страницы: "Главная", "О нас", "Поиск рецептов", "Регистрация", "Авторизация"</p>
+                    <p>exp@example.com</p>
+                    <p><button class="button-a">Связаться</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column-a">
+            <div class="card-a">
+                <img src="../static/img/Daniar.jpg" alt="Mike" style="width:100%">
+                <div class="container-a">
+                    <h2>Аминов Дониер</h2>
+                    <p class="title-a">Backend developer</p>
+                    <p>Создал обработку различных запросов в базы данных, авторизацию, регистацию, добавление рецептов и изменение профиля</p>
+                    <p>exp@example.com</p>
+                    <p><button class="button-a">Связаться</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column-a">
+            <div class="card-a">
+                <img src="../static/img/Maria.jpg" alt="John" style="width:100%">
+                <div class="container-a">
+                    <h2>Башкева Мария</h2>
+                    <p class="title-a">Data Miner</p>
+                    <p>Создала базы данных, парсила необходимую информацию</p>
+                    <p>exp@example.com</p>
+                    <p><button class="button-a">Связаться</button></p>
+                </div>
+            </div>
+        </div>
+        <div class="column-a">
+            <div class="card-a">
+                <img src="../static/img/Kirill.jpg" alt="John" style="width:100%">
+                <div class="container-a">
+                    <h2>Озарян Кирилл</h2>
+                    <p class="title-a">Frontend & Tester</p>
+                    <p>Тестировал проект и сверстал страницы: "О рецепте", "Личный кабинет", "Изменение профиля", "Добавление рецепта"</p>
+                    <p>exp@example.com</p>
+                    <p><button class="button-a">Связаться</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__text">
+                        <div class="footer__logo">
+                            <a href="/index"><img src="../static/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="footer__copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/isotope.pkgd.min.js"></script>
+    <script src="../static/js/ajax-form.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../static/js/scrollIt.js"></script>
+    <script src="../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/nice-select.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <!-- <script src="js/gijgo.min.js"></script> -->
+    <script src="../static/js/range.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="../static/js/contact.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/jquery.form.js"></script>
+    <script src="../static/js/jquery.validate.min.js"></script>
+    <script src="../static/js/mail-script.js"></script>
+
+
+    <script src="../static/js/main.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 24600,
+                values: [750, 24600],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1] + "/ Year");
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1) + "/ Year");
+        });
+    </script>
+</body>
+
+</html>

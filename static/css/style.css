@@ -2320,6 +2320,62 @@ h3 {
   white-space: normal !important;
 }
 
+.column-a {
+    float: left;
+    width: 25%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.card-a {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.about-section-a {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+}
+
+.container-a {
+    padding: 0 16px;
+}
+
+    .container-a::after, .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.title-a {
+    color: grey;
+}
+
+.button-a {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .button-a:hover {
+        background-color: #555;
+    }
+
+@media screen and (max-width: 650px) {
+    .column-a {
+        width: 100%;
+        display: block;
+    }
+}
+
 /* line 1, ../../Arafath/CL/December/235. recipe board/HTML/scss/_footer.scss */
 .footer {
     background-repeat: no-repeat;

@@ -80,6 +80,16 @@ def index():
     return render_template("index.html", recipes=recipes, acc=acc)
 
 
+@app.route('/about')
+def about():
+    user = current_user
+    acc = None
+    if current_user.is_authenticated:
+        acc = user.acc.first()
+    recipes = Recipe.query.order_by(db.desc(Recipe.likes)).all()
+    recipes = recipes[:5]
+    return render_template("about.html", recipes=recipes, acc=acc)
+
 
 @app.route('/recipes', methods=['POST', 'GET'])
 def recipes():

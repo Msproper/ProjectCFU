@@ -48,6 +48,7 @@
                                         <ul id="navigation">
                                             <li><a href="index">Главная</a></li>
                                             <li><a href="recipes">Поиск рецептов</a></li>
+                                            <li><a href="#">О создателях</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -94,21 +95,12 @@
                 <input class="form-control" type="text" name="country" id="country" placeholder="Введите страну" value="{{ recipe.country }}">
             </div>
             <div class="group">
-                <label>Категория:</label>
-                <select class="wide" name="category" id="category">
-                    <option data-display="Категория">Категория</option>
-                    <option value="Выпечка и десерты">Выпечка и десерты(188)</option>
-                    <option value="Основные блюда">Основные блюда(161)</option>
-                    <option value="Супы">Супы(75)</option>
-                    <option value="Завтраки">Завтраки(72)</option>
-                    <option value="Закуски">Закуски(64)</option>
-                    <option value="Салаты">Салаты(55)</option>
-                    <option value="Паста и пицца">Паста и пицца(38)</option>
-                    <option value="Сэндвичи">Сэндвичи(10)</option>
-                    <option value="Напитки">Напитки(10)</option>
-                    <option value="Ризотто">Ризотто(7)</option>
-                    <option value="Соусы и маринады">Соусы и маринады(6)</option>
-                </select>
+                <label>Время приготовления:</label>
+                <input class="form-control" type="text" name="time" id="time" placeholder="Введите время" value="{{ recipe.time }}">
+            </div>
+            <div class="group">
+                <label>КБЖУ (Каллории, Белки, Жиры, Углеводы):</label>
+                <input class="form-control" type="text" name="kbgu" id="kbgu" placeholder="Введите КБЖУ (через запятую)">
             </div>
             <div class="group">
                 <label>Описание:</label>
@@ -126,7 +118,26 @@
                 <label>Этапы приготовления:</label>
                 <input class="form-control" type="text" name="text" id="text" placeholder="Введите текст рецепта" value="{{ recipe.text }}">
             </div>
-            <div class="pl1 reset_btn">
+            <div class="group">
+                <div>
+                    <label>Категория:</label>
+                    <select class="wide" name="category" id="category">
+                        <option data-display="Категория">Категория</option>
+                        <option value="Выпечка и десерты">Выпечка и десерты(188)</option>
+                        <option value="Основные блюда">Основные блюда(161)</option>
+                        <option value="Супы">Супы(75)</option>
+                        <option value="Завтраки">Завтраки(72)</option>
+                        <option value="Закуски">Закуски(64)</option>
+                        <option value="Салаты">Салаты(55)</option>
+                        <option value="Паста и пицца">Паста и пицца(38)</option>
+                        <option value="Сэндвичи">Сэндвичи(10)</option>
+                        <option value="Напитки">Напитки(10)</option>
+                        <option value="Ризотто">Ризотто(7)</option>
+                        <option value="Соусы и маринады">Соусы и маринады(6)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pl1 reset_btn" style="margin-top:60px">
                 <button class="boxed-btn3 w-100 btn btn-success" type="submit">Применить</button>
             </div>
         </form>
