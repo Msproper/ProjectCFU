@@ -1,31 +1,49 @@
+import requests
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from DBclasses import Users, UserAccount, Recipe, db
+import os
+import time
+from urllib.request import urlretrieve
+from requests.exceptions import ConnectTimeout
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-db = SQLAlchemy(app)
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-
-class UserAccount(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    surname = db.Column(db.String(150))
-    date = db.Column(db.DateTime)
-    User_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+db.init_app(app)
+# URL фотографии
 
 
-from datetime import datetime
+@app.route('/')
+@app.route('/home')
+def index():
+    urls = Recipe.query.all()
+    urls_items = [x.photo for x in urls ]
+    for el in urls_items:
+        print(el)
+    if not os.path.exists("img_little3"):
+        os.makedirs("img_little3")
 
-date_str = '2022-03-26'
-date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+    max_retries = 13
+    # открываем файл для записи бинарных данных
+    for i, url in enumerate(urls_items[609:]):
+        try:
+            retries = 0
+            time.sleep(2)
+            while retries < max_retries:
+                try:
+                    response = requests.get(url, stream=True, timeout=10)
+                    if response.status_code == 200:
+                        filename = f"{i+610}.webp"
+                        filepath = os.path.join("img_little3", filename)
+                        urlretrieve(url, filepath)
+                        break
+                except ConnectTimeout:
+                    retries += 1
+        except:
+            pass
 
-def delete():
+    return "hello"
+
+if __name__ == "__main__":
     with app.app_context():
-        db.session.query(Users).delete()
-        db.session.query(UserAccount).delete()
-        db.session.commit()
-
-
+        db.create_all()
+    app.run(debug=True)

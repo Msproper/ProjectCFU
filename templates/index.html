@@ -1,55 +1,361 @@
-{%extends 'base.html' %}
+<!doctype html>
+<html class="no-js" lang="zxx">
 
-{%block title %}
-Главная страница
-{%endblock%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EDA!!!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{%block body %}
-<h1><div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Free</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-          </div>
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/gijgo.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.css">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="index">
+                                        <img src="../static/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index">Главная</a></li>
+                                            <li><a href="recipes">Поиск рецептов</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+                                    {% if acc %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/logout">Log out</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="login">Sign in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="register">Sign up</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
-          </div>
+    </header>
+    <!-- header-end -->
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="slider_text">
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s" color="#9f142b">4536+ Рецептов</h5>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Найди свой рецепт мечты</h3>
+                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Мы поможем вам найти рецепт в сообстветствии со всеми вашими пожеланиями</p>
+                            {% if acc %}
+                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                <a href="recipes" class="boxed-btn3">Найти рецепт</a>
+                            </div>
+                            {% else %}
+                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                <a href="register" class="boxed-btn3">Зарегистироваться сейчас</a>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-bg-primary border-primary">
-            <h4 class="my-0 fw-normal">Enterprise</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29<small class="text-muted fw-light">/mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
-          </div>
+    </div>
+    <!-- slider_area_end -->
+    <!-- catagory_area -->
+    <div class="catagory_area">
+        <form action="/recipes" method="get">
+        <div class="container">
+            <div class="row cat_search">
+                    <div class="col-lg-9 col-md-9">
+                        <div class="single_input">
+                                  <input type="text" name="keyword" placeholder="Ключевое слово">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="find_btn">
+                            <button type="submit" class="boxed-btn3">Найти</button>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="popular_search d-flex align-items-center">
+                        <span>Частые запросы:</span>
+                        <ul>
+                            <li><a href="{{ url_for('recipes', ingredient='Сырники') }}">Сырники</a></li>
+                            <li><a href="{{ url_for('recipes', ingredient='Перец') }}">Перец</a></li>
+                            <li><a href="{{ url_for('recipes', category='Завтраки') }}">Завтраки</a></li>
+                            <li><a href="{{ url_for('recipes', category='Паста и пицца') }}">Паста и пицца</a></li>
+                            <li><a href="{{ url_for('recipes', category='Напитки') }}">Напитки</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div></h1>
-{%endblock%}
+        </form>
+    </div>
+    <!--/ catagory_area -->
+    <!-- popular_catagory_area_start  -->
+    <div class="popular_catagory_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title mb-40">
+                        <h3>Популярные категории</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', country='Русская ') }}"><h4>Русская кухня</h4></a>
+                        <p> <span>120</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', category='Основные блюда') }}"><h4>Основные блюда</h4></a>
+                        <p> <span>250</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', country='Итальянская ') }}"><h4>Итальянская кухня</h4></a>
+                        <p> <span>100</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', category='Выпечка и десерты') }}"><h4>Выпечка и десерты</h4></a>
+                        <p> <span>188</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', min_time='5', max_time='15') }}"><h4>Быстрые блюда</h4></a>
+                        <p> <span>110</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', calories_low=0, calories_up=200) }}"><h4>Легкие блюда</h4></a>
+                        <p> <span>100</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', category='Супы') }}"><h4>Супы</h4></a>
+                        <p> <span>170</span> Рецептов</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{{ url_for('recipes', category='Французкая ') }}"><h4>Французкая кухня</h4></a>
+                        <p> <span>100</span> Рецептов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- popular_catagory_area_end  -->
+    <!-- recipe_searcing_wrap  -->
+    <div class="recipe_searcing_wrap overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 offset-lg-1 col-md-6">
+                    <div class="searching_text">
+                        <h3>Ищете рецепт?</h3>
+                        <p>Мы собрали широкую базу рецептов. Вы обязательно найдете рецепт по своему вкусу. </p>
+                        <a href="recipes" class="boxed-btn3">Найти рецепт</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-6">
+                    <div class="searching_text">
+                        <h3>Поделитесь рецептом</h3>
+                        <p>Если вы знаете вкусные и интересные блюда, обязательно поделитесь ими со всем миром. </p>
+                        {% if acc %}
+                        <a href="create" class="boxed-btn3">Выложить рецепт</a>
+                        {% else %}
+                        <a href="login" class="boxed-btn3">Выложить рецепт</a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- recipe_searcing_wrap end  -->
+    <!-- recipe_listing_area_start  -->
+    <div class="recipe_listing_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section_title">
+                        <h3>ТОП рецепты</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="brouse_recipe text-right">
+                        <a href="recipe_details" class="boxed-btn4">Смотреть больше рецептов</a>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_lists">
+                <div class="row">
+                    {% for el in recipes%}
+                     <div class="col-lg-12 col-md-12">
+                                <div class="single_recipes white-bg justify-content-between">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <div class="recipes_left align-items-center">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <div class="thumb" style="background-image:url(../static/img_little/{{el.id}}.webp)">
+                                                            <!--<img src="../static/img_little/{{el.id}}.webp" alt="">-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-10">
+                                                        <div class="recipes_conetent">
+                                                            <a href="recipe_details/{{ el.id }}"><h4>{{ el.name }}</h4></a>
+                                                            <div class="links_locat d-flex align-items-center">
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-map-marker"></i> {{ el.country }}</p>
+                                                                </div>
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-clock-o"></i> {{ el.time }} мин. </p>
+                                                                </div>
+                                                                <div class="location">
+                                                                    <p> <i class="fa fa-smile-o"></i> {{ el.category }} </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="recipes_right">
+                                                <div class="apply_now">
+                                                    <a class="heart_mark"> <i class="ti-heart"></i> {{ el.likes }} </a>
+                                                    <a href="recipe_details/{{ el.id }}" class="boxed-btn3">Читать</a>
+                                                </div>
+                                                <div class="date">
+                                                    <p>Добавлено: {{el.date_column}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- recipe_listing_area_end  -->
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__text">
+                        <div class="footer__logo">
+                            <a href="#"><img src="../static/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="footer__copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/isotope.pkgd.min.js"></script>
+    <script src="../static/js/ajax-form.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../static/js/scrollIt.js"></script>
+    <script src="../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/nice-select.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/gijgo.min.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="../static/js/contact.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/jquery.form.js"></script>
+    <script src="../static/js/jquery.validate.min.js"></script>
+    <script src="../static/js/mail-script.js"></script>
+
+
+    <script src="../static/js/main.js"></script>
+</body>
+
+</html>

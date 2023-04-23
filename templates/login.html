@@ -1,19 +1,151 @@
-{%extends 'base.html' %}
+<!doctype html>
+<html class="no-js" lang="zxx">
 
-{%block title %}
-Страница входа
-{%endblock%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EDA!!!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{%block body %}
-<div class="conteiner mt-5">
-    <h1>Войти в кабинет</h1>
-    <form method="post">
-        <input type="text" name="username" id="username" class="form-control"><br>
-        <input type="password" name="password" id="password" class="form-control"><br>
-        <input type="submit" class="btn btn-success" value="Отправить">
-    </form>
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/gijgo.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.css">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area" style="background-color: #f1be16">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="/index">
+                                        <img src="../static/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/index">Главная</a></li>
+                                            <li><a href="/recipes">Поиск рецептов</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/login">Sign in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/register">Sign up</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="bx">
+        <form method="post" class="registration" action="">
+            <h1 title="Авторизация">Авторизация</h1>
+            <div class="group">
+                <label>Имя пользователя:</label>
+                <input type="text" name="username" id="username" class="form-control">
+            </div>
+            <div class="group">
+                <label>Пароль:</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="pl1 reset_btn">
+                <button class="boxed-btn3 w-100 btn btn-success" type="submit">Войти</button>
+            </div>
+        </form>
         {% if error %}
         <p style="color:red">{{ error }}</p>
         {% endif %}
-</div>
-{%endblock%}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__text">
+                        <div class="footer__logo">
+                            <a href="/index"><img src="../static/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="footer__copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <script src="static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/owl.carousel.min.js"></script>
+    <script src="static/js/isotope.pkgd.min.js"></script>
+    <script src="static/js/ajax-form.js"></script>
+    <script src="static/js/waypoints.min.js"></script>
+    <script src="static/js/jquery.counterup.min.js"></script>
+    <script src="static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="static/js/scrollIt.js"></script>
+    <script src="static/js/jquery.scrollUp.min.js"></script>
+    <script src="static/js/wow.min.js"></script>
+    <script src="static/js/nice-select.min.js"></script>
+    <script src="static/js/jquery.slicknav.min.js"></script>
+    <script src="static/js/jquery.magnific-popup.min.js"></script>
+    <script src="static/js/plugins.js"></script>
+    <script src="static/js/gijgo.min.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="static/js/contact.js"></script>
+    <script src="static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="static/js/jquery.form.js"></script>
+    <script src="static/js/jquery.validate.min.js"></script>
+    <script src="static/js/mail-script.js"></script>
+
+
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>

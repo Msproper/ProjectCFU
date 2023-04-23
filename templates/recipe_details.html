@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EDA Board</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/gijgo.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.css">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="/index">
+                                        <img src="../static/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/index">Главная</a></li>
+                                            <li><a href="/recipes">Поиск рецептов</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+                                    {% if acc %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/logout">Log out</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/user">Профиль</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="/login">Sign in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/register">Sign up</a>
+                                    </div>
+                                    {%endif%}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Рецепт</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="recipe_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="recipe_details_header">
+                        <div class="single_recipes white-bg d-flex justify-content-between">
+                            <div class="recipes_left d-flex align-items-center">
+                                <div class="thumb" style="background-image:url(../static/img_little/{{recipe.id}}.webp)">
+                                    </div>
+                                <div class="recipes_conetent">
+                                    <a><h4>{{recipe.name}}</h4></a>
+                                    <div class="links_locat d-flex align-items-center">
+                                        <div class="location">
+                                            <p> <i class="fa fa-map-marker"></i> {{recipe.country}}</p>
+                                        </div>
+                                        <div class="location">
+                                            <p> <i class="fa fa-clock-o"></i> {{recipe.time}} минут</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recipes_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark {% if liked%} heart_mark_liked {%endif%}" data-recipe-id="{{ recipe.id }}" id="Heart">
+                                                      <i class="ti-heart"></i>
+                                                      <span id="recipe-{{ recipe.id }}">{{ recipe.likes }}</span>
+                                                    </a>
+                                </div>
+                            </div>
+
+                            {% if redactable%}
+                                <div>
+                                    <a class="boxed-btn3" href="/create/{{ recipe.id }}">Редактировать</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="descript_wrap white-bg">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="../static/img_little2/arr_{{recipe.id}}.webp" alt="">
+                        </div>
+                        <div class="single_wrap">
+                            {%if not(recipe.description=="-")%}
+                            <h4>Описание</h4>
+                            <p>{{recipe.description}}</p>
+                            {%endif%}
+                        </div>
+                        <div class="single_wrap">
+                            <h4>Ингредиенты</h4>
+                            <ul>
+                                {% for el, value in ingr.items() %}
+                                <li>{{el}} : {{value}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="single_wrap">
+                            <h4>Инструкция приготовления</h4>
+                            <ol type="1">
+                                {% for el in text %}
+                                <li>{{el}}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="comment-form">
+                        <h4>Оставьте отзыв</h4>
+                        <form class="form-contact comment_form" id="commentForm" method="POST">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                                  placeholder="Напишите отзыв"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm btn_1 boxed-btn">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="comments-area">
+                        <h4>05 Коментариев</h4>
+                        {% for el in comments%}
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        <img src="../static/img/avatar.jpg" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            {{el.text}}
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a>{{el.name}}</a>
+                                                </h5>
+                                                <p class="date">{{el.date}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="recipe_sumary">
+                        <div class="summery_header">
+                            <h3>Описание</h3>
+                        </div>
+                        <div class="recipe_content">
+                            <ul>
+                                <li>Опубликовано: <span>{{recipe.date_column}}</span></li>
+                                <li>Время приготовления: <span>{{recipe.time}} минут</span></li>
+                                <li>Кухня: <span>{{recipe.country}}</span></li>
+                                <li>Категория: <span> {{recipe.category}}</span></li>
+                                <li>Калорий: <span> {{recipe.calories}} ккал</span></li>
+                                <li>Белков: <span> {{recipe.protein}} грамм</span></li>
+                                <li>Жиров: <span> {{recipe.fat}} грамм</span></li>
+                                <li>Углеводов: <span> {{recipe.CHO}} грамм</span></li>
+                                <li>Автор: <span> {{author.name}} {{author.surname}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__text">
+                        <div class="footer__logo">
+                            <a href="/index"><img src="../static/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="footer__copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <script src="../static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/isotope.pkgd.min.js"></script>
+    <script src="../static/js/ajax-form.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../static/js/scrollIt.js"></script>
+    <script src="../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/nice-select.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/gijgo.min.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="../static/js/contact.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/jquery.form.js"></script>
+    <script src="../static/js/jquery.validate.min.js"></script>
+    <script src="../static/js/mail-script.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/like_func.js"></script>
+</body>
+
+</html>
